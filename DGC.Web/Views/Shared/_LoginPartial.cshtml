@@ -1,0 +1,19 @@
+﻿@{
+
+    Layout = null;
+}
+
+<div id="loginPanel" ng-controller="LoginCrtl" style="padding: 10px;min-width:240px;">
+    <form action="" method="post" role="form" class="form-horizontal">
+        <input class="form-control" ng-model="Login.UserName" type="text" style="margin-bottom:.5em">
+        <input class="form-con  trol" ng-model="Login.Password" type="password" style="margin-bottom:.5em">
+        <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+        </div>
+        <div class="field-validation-error">
+            <label id="errorMessage" style="color: red;"></label>
+        </div>
+        <input id="btnSignIn" class="btn btn-primary" style="margin-top:.75em;width: 100%; height: 32px; font-size: 13px;"
+               type="button" ng-click="Authenticate(Login)" value="Sign In">
+    </form>
+</div>

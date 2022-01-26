@@ -1,0 +1,94 @@
+﻿@using KBZ.Administration.Domain.Model
+{
+
+@*@{
+    var roleWiseMenuList = ((List<RoleWiseMenuModel>)Session["PermittedMenues"]);
+    roleWiseMenuList = roleWiseMenuList.Where(x => x.Menu.IsVisibleInMenuList == true).ToList();
+}*@
+@{
+    {
+        <div class="horizontal-menu navbar-collapse collapse top-menu-bg  nav-collapse collapse" id="nav-collapse">
+            <ul class="nav navbar-nav" id="menu">
+                @{
+                    if (Session["UserInformation"] != null)
+                    {
+                        var loginUserInformation = (UserInformationModel)Session["UserInformation"];
+
+                        if (loginUserInformation != null)
+                        {
+                            <li>
+                                <a href=@loginUserInformation.HomeLocation class="main-menu-color">
+                                    <i class="fa fa-dashboard" style="color: #0b64c3;"></i> Dashboard
+                                </a>
+                            </li>
+                        }
+                    }
+
+                 //   var parentGroups = roleWiseMenuList.Where(x => x.IsActive == true).OrderBy(s => s.Menu.ParentMenu.MenuOrder).GroupBy(s => s.Menu.ParentId);
+
+                //    var menusList = roleWiseMenuList.Where(roleWiseMenu => roleWiseMenu.Menu.ParentMenu.ParentId == 0 && roleWiseMenu.IsActive == true).ToList();
+
+                 //   var groupList = menusList.Where(x => x.IsActive == true).OrderBy(s => s.Menu.ParentMenu.MenuOrder).GroupBy(s => s.Menu.ParentId);
+
+                    foreach (var group in groupList)
+                    {
+                        <li>
+                            @{
+                               // var roleWiseMenuModel = roleWiseMenuList.FirstOrDefault(s => s.Menu.ParentId == @group.Key);
+                                if (roleWiseMenuModel != null && roleWiseMenuModel.Menu.ParentMenu != null)
+                                {
+                                    @*<a href="" data-close-others="true" data-hover="dropdown" data-toggle="dropdown" class="main-menu-color">
+                                        <i class=@roleWiseMenuModel.Menu.ParentMenu.MenuIcon></i>
+                                        @roleWiseMenuModel.Menu.ParentMenu.MenuName <i class="fa fa-angle-down"></i>
+                                    </a>*@
+                                }
+                            }
+                            <ul class="dropdown-menu">
+
+                                @foreach (var roleWiseMenu in @group)
+                                {
+                                    string submenu = "";
+                                    //      var childGroup = parentGroups.FirstOrDefault(p => p.Key == roleWiseMenu.Menu.Id);
+                                    //if (childGroup != null)
+                                    //{
+                                    //    submenu = "dropdown-submenu";
+                                    //}
+
+                                    <li class=@submenu>
+                                        @if (roleWiseMenu.Menu.Page == null)
+                                        {
+                                            <a href="#"><i class=@roleWiseMenu.Menu.MenuIcon></i>@roleWiseMenu.Menu.MenuName</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@roleWiseMenu.Menu.Page.PagePath"> <i class=@roleWiseMenu.Menu.MenuIcon></i>@roleWiseMenu.Menu.MenuName</a>
+                                        }
+
+                                        @*@if (childGroup != null)
+                                        {
+                                            <ul class="dropdown-menu">
+                                                @foreach (var child in childGroup)
+                                                {
+                                                    <li>
+                                                        <a href="@child.Menu.Page.PagePath"><i class=@child.Menu.MenuIcon></i>@child.Menu.MenuName</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }*@
+
+                                    </li>
+                                }
+
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>
+
+        </div>
+    }
+}
+
+
+
+

@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KBZDBContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BranchOfBanks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="200" />
+          <Property Name="BranchCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="BranchLocation" Type="varchar" MaxLength="50" />
+          <Property Name="Latitude" Type="varchar" MaxLength="50" />
+          <Property Name="Longitude" Type="varchar" MaxLength="50" />
+          <Property Name="PrinterId" Type="int" />
+          <Property Name="PrintStartDate" Type="datetime" />
+          <Property Name="LastPrintingDateTime" Type="datetime" />
+          <Property Name="TotalNumberOfLeafsPrinted" Type="bigint" />
+          <Property Name="TotalNumberOfBooks" Type="bigint" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateId" Type="bigint" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PrinterInformations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrinterNumber" Type="varchar" MaxLength="50" />
+          <Property Name="PrinterLocation" Type="varchar" MaxLength="50" />
+          <Property Name="PrinterSetupDate" Type="datetime" />
+          <Property Name="PrinterStartDate" Type="datetime" />
+          <Property Name="LastPrintingDateTime" Type="datetime" />
+          <Property Name="TotalNumberOfLeafsPrinted" Type="bigint" />
+          <Property Name="TotalNumberOfBooks" Type="bigint" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+          <Property Name="ModifiedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Requisitions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" />
+          <Property Name="ChequeBranch" Type="varchar" MaxLength="50" />
+          <Property Name="Cheque_location_code_RequestBranch_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+          <Property Name="RequestBranchCode" Type="varchar" MaxLength="50" />
+          <Property Name="PickupBranchId" Type="bigint" />
+          <Property Name="SerialNumberStart" Type="varchar" MaxLength="50" />
+          <Property Name="ChequeBookType" Type="varchar" MaxLength="50" />
+          <Property Name="NumberOfLeaf" Type="int" />
+          <Property Name="PrinterId" Type="bigint" />
+          <Property Name="RequsitionSlipSerialNumber" Type="varchar" MaxLength="50" />
+          <Property Name="NRCPerson" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="SerialNoOfCheqEnd" Type="varchar" MaxLength="50" />
+          <Property Name="DeliveredBy" Type="varchar" MaxLength="50" />
+          <Property Name="ChequeOrderBy" Type="int" />
+          <Property Name="ChequePrintedCommandBy" Type="int" />
+          <Property Name="OrderDateTime" Type="datetime" />
+          <Property Name="PrintDateTime" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nchar" MaxLength="10" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="bigint" />
+        </EntityType>
+        <EntityType Name="UserInformations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" />
+          <Property Name="Designation" Type="varchar" MaxLength="50" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DateCreated" Type="varchar" MaxLength="50" />
+          <Property Name="AccessToken" Type="varchar" MaxLength="50" />
+          <Property Name="AccessTokenValidityPeriod" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="LastPasswordChangeDate" Type="datetime" />
+          <Property Name="PasswordExpirationRemainingAge" Type="int" />
+          <Property Name="IsNotifyRequiredforPassword" Type="bit" />
+          <Property Name="IsPasswordExpired" Type="bit" />
+          <Property Name="UserType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_City_State">
+          <End Role="States" Type="Self.States" Multiplicity="0..1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KBZDBContextStoreContainer">
+          <EntitySet Name="BranchOfBanks" EntityType="Self.BranchOfBanks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrinterInformations" EntityType="Self.PrinterInformations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requisitions" EntityType="Self.Requisitions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInformations" EntityType="Self.UserInformations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+            <End Role="States" EntitySet="States" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KBZDBContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BranchOfBank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BranchCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BranchLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrinterId" Type="Int32" />
+          <Property Name="PrintStartDate" Type="DateTime" Precision="3" />
+          <Property Name="LastPrintingDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TotalNumberOfLeafsPrinted" Type="Int64" />
+          <Property Name="TotalNumberOfBooks" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int64" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateId" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <NavigationProperty Name="State" Relationship="Self.FK_City_State" FromRole="Cities" ToRole="States" />
+        </EntityType>
+        <EntityType Name="PrinterInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrinterNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrinterLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrinterSetupDate" Type="DateTime" Precision="3" />
+          <Property Name="PrinterStartDate" Type="DateTime" Precision="3" />
+          <Property Name="LastPrintingDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TotalNumberOfLeafsPrinted" Type="Int64" />
+          <Property Name="TotalNumberOfBooks" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Requisition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChequeBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cheque_location_code_RequestBranch_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestBranchCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PickupBranchId" Type="Int64" />
+          <Property Name="SerialNumberStart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChequeBookType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumberOfLeaf" Type="Int32" />
+          <Property Name="PrinterId" Type="Int64" />
+          <Property Name="RequsitionSlipSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NRCPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SerialNoOfCheqEnd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveredBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ChequeOrderBy" Type="Int32" />
+          <Property Name="ChequePrintedCommandBy" Type="Int32" />
+          <Property Name="OrderDateTime" Type="DateTime" Precision="3" />
+          <Property Name="PrintDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_City_State" FromRole="States" ToRole="Cities" />
+        </EntityType>
+        <Association Name="FK_City_State">
+          <End Role="States" Type="Self.State" Multiplicity="0..1" />
+          <End Role="Cities" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DCBankAdminContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BranchOfBanks" EntityType="Self.BranchOfBank" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="PrinterInformations" EntityType="Self.PrinterInformation" />
+          <EntitySet Name="Requisitions" EntityType="Self.Requisition" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+            <End Role="States" EntitySet="States" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <EntitySet Name="UserInformations" EntityType="KBZDBContext.UserInformation" />
+        </EntityContainer>
+        <EntityType Name="UserInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccessToken" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccessTokenValidityPeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="LastPasswordChangeDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordExpirationRemainingAge" Type="Int32" />
+          <Property Name="IsNotifyRequiredforPassword" Type="Boolean" />
+          <Property Name="IsPasswordExpired" Type="Boolean" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KBZDBContextStoreContainer" CdmEntityContainer="DCBankAdminContext">
+          <EntitySetMapping Name="BranchOfBanks">
+            <EntityTypeMapping TypeName="KBZDBContext.BranchOfBank">
+              <MappingFragment StoreEntitySet="BranchOfBanks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="BranchLocation" ColumnName="BranchLocation" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="PrinterId" ColumnName="PrinterId" />
+                <ScalarProperty Name="PrintStartDate" ColumnName="PrintStartDate" />
+                <ScalarProperty Name="LastPrintingDateTime" ColumnName="LastPrintingDateTime" />
+                <ScalarProperty Name="TotalNumberOfLeafsPrinted" ColumnName="TotalNumberOfLeafsPrinted" />
+                <ScalarProperty Name="TotalNumberOfBooks" ColumnName="TotalNumberOfBooks" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="KBZDBContext.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrinterInformations">
+            <EntityTypeMapping TypeName="KBZDBContext.PrinterInformation">
+              <MappingFragment StoreEntitySet="PrinterInformations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PrinterNumber" ColumnName="PrinterNumber" />
+                <ScalarProperty Name="PrinterLocation" ColumnName="PrinterLocation" />
+                <ScalarProperty Name="PrinterSetupDate" ColumnName="PrinterSetupDate" />
+                <ScalarProperty Name="PrinterStartDate" ColumnName="PrinterStartDate" />
+                <ScalarProperty Name="LastPrintingDateTime" ColumnName="LastPrintingDateTime" />
+                <ScalarProperty Name="TotalNumberOfLeafsPrinted" ColumnName="TotalNumberOfLeafsPrinted" />
+                <ScalarProperty Name="TotalNumberOfBooks" ColumnName="TotalNumberOfBooks" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requisitions">
+            <EntityTypeMapping TypeName="KBZDBContext.Requisition">
+              <MappingFragment StoreEntitySet="Requisitions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="ChequeBranch" ColumnName="ChequeBranch" />
+                <ScalarProperty Name="Cheque_location_code_RequestBranch_Code" ColumnName="Cheque_location_code_RequestBranch_Code" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="RequestBranchCode" ColumnName="RequestBranchCode" />
+                <ScalarProperty Name="PickupBranchId" ColumnName="PickupBranchId" />
+                <ScalarProperty Name="SerialNumberStart" ColumnName="SerialNumberStart" />
+                <ScalarProperty Name="ChequeBookType" ColumnName="ChequeBookType" />
+                <ScalarProperty Name="NumberOfLeaf" ColumnName="NumberOfLeaf" />
+                <ScalarProperty Name="PrinterId" ColumnName="PrinterId" />
+                <ScalarProperty Name="RequsitionSlipSerialNumber" ColumnName="RequsitionSlipSerialNumber" />
+                <ScalarProperty Name="NRCPerson" ColumnName="NRCPerson" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SerialNoOfCheqEnd" ColumnName="SerialNoOfCheqEnd" />
+                <ScalarProperty Name="DeliveredBy" ColumnName="DeliveredBy" />
+                <ScalarProperty Name="ChequeOrderBy" ColumnName="ChequeOrderBy" />
+                <ScalarProperty Name="ChequePrintedCommandBy" ColumnName="ChequePrintedCommandBy" />
+                <ScalarProperty Name="OrderDateTime" ColumnName="OrderDateTime" />
+                <ScalarProperty Name="PrintDateTime" ColumnName="PrintDateTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="KBZDBContext.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInformations">
+            <EntityTypeMapping TypeName="KBZDBContext.UserInformation">
+              <MappingFragment StoreEntitySet="UserInformations">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="IsPasswordExpired" ColumnName="IsPasswordExpired" />
+                <ScalarProperty Name="IsNotifyRequiredforPassword" ColumnName="IsNotifyRequiredforPassword" />
+                <ScalarProperty Name="PasswordExpirationRemainingAge" ColumnName="PasswordExpirationRemainingAge" />
+                <ScalarProperty Name="LastPasswordChangeDate" ColumnName="LastPasswordChangeDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AccessTokenValidityPeriod" ColumnName="AccessTokenValidityPeriod" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

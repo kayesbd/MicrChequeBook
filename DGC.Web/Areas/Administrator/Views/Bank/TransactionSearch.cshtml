@@ -1,0 +1,232 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="main-content" style="margin:0;">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-bold">Advance Transaction Search</h1>
+        </div>
+        <div class="row">
+            <br>
+            <form class="form-horizontal" name="transactionSearchForm" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="col-sm-12" style="padding:0; margin:0">
+                    <div class="col-sm-12" id="editPanel">
+                        <div class="msgBox">
+                            <div validation-summary ng-show="showValidation">
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="fa fa-00 icomoon-search-4"></span>
+                                <span style="font-size:medium; color:#243972;">Search Criteria</span>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="col-sm-9 col-sm-offset-3">
+                                                <h3>Merchant Information</h3>
+                                            </div>
+                                        </div>
+
+                                        @*<div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Merchant Id:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" numbers-only="numbers-only" class="form-control" name="MobileNumber" ng-model="transactionSearchVM.MerchantId" />
+                                            </div>
+                                        </div>*@
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Merchant:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select name="MerchantId" class="form-control" ng-model="transactionSearchVM.MerchantId" ng-options="a.Id as a.CompanyName for a in MerchantList">
+                                                    <option value="">-- Select Merchant --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Company Name:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" alphanumeric-only="alphanumeric-only" name="CompanyName" ng-model="transactionSearchVM.CompanyName" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Company Short Name:
+                                            </label>
+                                            <div class="col-sm-9 control-label">
+                                                <input type="text" class="form-control" alphanumeric-only="alphanumeric-only" ng-model="transactionSearchVM.CompanyShortName" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-9 col-sm-offset-3">
+                                                <h3>Transaction Information</h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                Transaction Id:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" alphanumeric-only="alphanumeric-only" ng-model="transactionSearchVM.TransactionId" />
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                Transaction Type
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="transactionSearchVM.TransactionType" ng-options="item.TransactionType as TransactionType for item in transactionTypeList">
+                                                    <option value="">-- Select --</option>
+                                                </select>
+                                            </div>
+                                        </div>*@
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                Transaction Type:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="transactionSearchVM.TransactionType" ng-options="item for item in transactionTypeList" ng-change="onTransactionTypechange()">
+                                                    <option value="">-- Select --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Transaction Status:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="transactionSearchVM.TransactionStatus" ng-options="item for item in transactionStatusList">
+                                                    <option value="">-- Select --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div class="col-sm-6">
+                                        
+
+                                        <div class="form-group">
+                                            <div class="col-sm-9 col-sm-offset-3">
+                                                <h3>Customer Information</h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Customer Id:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" numbers-only="numbers-only" name="customerId" ng-model="transactionSearchVM.customerId" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Mobile Number:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="MobileNumber" ng-model="transactionSearchVM.CustomerMobileNumber" mobile-number="mobile-number" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Email:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="email" class="form-control" name="Email" ng-model="transactionSearchVM.CustomerEmail" ng-class="{ 'error-mark' : transactionSearchForm.Email.$invalid  && submitted }" />
+                                                <div validation-message ng-show="transactionSearchForm.Email.$invalid  && submitted" && submitted" class="error">
+                                                    Not valid email!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                First Name:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" alphanumeric-only="alphanumeric-only" class="form-control" ng-model="transactionSearchVM.CustomerFirstName" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Last Name:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" alphanumeric-only="alphanumeric-only" class="form-control" ng-model="transactionSearchVM.CustomerLastName" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-9 col-sm-offset-3">
+                                                <h3>Date Range</h3>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                From Date:<span class="mandatory-star">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <span class="input-icon">
+                                                    <input type="text" class="form-control" autocomplete="off" limit-to="0" id="fromDateTime" ng-class="{ 'error-mark' : (IsRequiredFromDate == true)  }" />
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <div validation-message ng-show="IsRequiredFromDate == true" class="error">
+                                                    From Date is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                To Date:<span class="mandatory-star">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <span class="input-icon">
+                                                    <input type="text" class="form-control" autocomplete="off" limit-to="0" id="toDateTime" ng-class="{ 'error-mark' : (IsRequiredToDate == true || IsInvalidDate == true)  }" />
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <div validation-message ng-show="IsRequiredToDate == true" class="error">
+                                                    To Date is required
+                                                </div>
+                                                <div validation-message ng-show="IsInvalidDate == true" class="error">
+                                                    To Date should be greater than From Date
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body center bg-info padding-bottom20 padding-top20 ">
+                                <button type="button" class="btn btn-primary" ng-click="search(transactionSearchForm)"><span class="icomoon-search-2"></span>  Search</button>
+                                <button type="button" class="btn btn-primary" ng-click="clear()"><span class="icomoon-cancel"></span> Clear</button>
+                            </div>
+                        </div>
+
+                        <div id="editPanel">
+                            <div class="panel-body">
+                                <div k-filterable="true" k-pageable="true" id="tblTransactionSearchResult" class="ra-section k-grid k-widget" style="border:none;">
+                                </div>
+                            </div>
+                            <div style="padding-top: 5px; float:right">
+                                <h4>
+                                    Total Transaction Amount : <b>{{totalTransactionAmount}}</b>
+                                    @*<b>{{TransactionAmount}}</b>*@
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

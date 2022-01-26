@@ -1,0 +1,111 @@
+﻿@{
+    Layout = null;
+}
+<div class="main-content margin-left-none">
+    <div class="container">
+        <div class="page-header">
+            <h1>Audit Customer Entry </h1>
+        </div>
+        <div class="row">
+            <br>
+            <form class="form-horizontal" name="customerApprovalInformationForm" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="col-sm-12" style="padding:0; margin:0">
+                    <div class="col-sm-12" id="editPanel">
+                        <div class="msgBox">
+                            <div validation-summary ng-show="showValidation">
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="fa fa-00 icomoon-search-4"></span>
+                                <span style="font-size:medium; color:#243972;">Search Criteria</span>
+
+                                <div class="panel-tools">
+                                    <a class="btn btn-h" ng-show="IsAdmin == true" ng-href="#/Administrator/Admin/Home" href="#/Administrator/Admin/Home">
+                                        <span class="icomoon-arrow-left-5"></span> Dashboard
+                                    </a>
+                                    <a class="btn btn-h ng-hide" ng-show="IsAdmin == false" ng-href="#/Administrator/Bank/Home" href="#/Administrator/Bank/Home">
+                                        <span class="icomoon-arrow-left-5"></span> Dashboard
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                        <div class="form-group ">
+                                            <div class="col-sm-9 col-sm-offset-3">
+                                                <h4>Date Range</h4>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                From Date:<span class="mandatory-star">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <span class="input-icon">
+                                                    <input type="text" class="form-control" autocomplete="off" limit-to="0" id="fromDateTime" ng-class="{ 'error-mark' : (IsRequiredFromDate == true)  }" />
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <div validation-message ng-show="IsRequiredFromDate == true" class="error">
+                                                    From Date is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group ">
+                                            <div class="col-sm-9 col-sm-offset-3">
+                                                <h4><br /></h4>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                To Date:<span class="mandatory-star">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <span class="input-icon">
+                                                    <input type="text" class="form-control" autocomplete="off" limit-to="0" id="toDateTime" ng-class="{ 'error-mark' : (IsRequiredToDate == true)  }" />
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <div validation-message ng-show="IsRequiredToDate == true" class="error">
+                                                    To Date is required
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="panel-body center bg-info padding-bottom20 padding-top20 " style=" padding-right:60%;">
+                                <button type="button" class="btn btn-primary" ng-click="search(customerApprovalInformationForm)"><span class=" icomoon-search-2"></span>  Search</button>
+                                <button type="button" class="btn btn-primary" ng-click="clear()"><span class=" icomoon-cancel-circle"></span> Clear</button>
+                            </div>
+
+
+                        </div>
+
+                        <div class="panel panel-default" id="editPanel">
+                            <div>
+                                <div k-filterable="true" k-pageable="true" id="tblCustomerApprovalInfoSearchResult" class="ra-section k-grid k-widget" style="border:none;">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

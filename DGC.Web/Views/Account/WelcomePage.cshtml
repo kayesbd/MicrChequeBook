@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Welcome to KBZ Bank</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    @Styles.Render("~/Content/assets")
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/assets/css/MyraidPro.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/Library/jquery-2.1.0.js"></script>
+    <script src="~/Scripts/Library/angular.js"></script>
+    <script src="~/Scripts/Client/wellcomePageController.js"></script>
+    <link rel="shortcut icon" href="~/Content/Images/favicon.ico" />
+</head>
+<body style="background-color:#f6f6f6 !important;" class="layout-boxed" ng-app="welComePage">
+    <div class="main-container" style="margin:auto!important; border:1px solid #c8c7cc; background:white !important; display:table" ng-controller="wellcomePageController">
+        <div class="col-sm-12" style="background:#38516C">
+            <div style="col-sm-6">
+                <a class="navbar-brand not-active-a" href="javascript:void(0);" style="height:50px; padding:0 0 0 15px !important;">
+                    <img src="/assets/images/kbz-logo-wh.png"> <span style="font-size:16px; line-height:50px;" class="noselect hidden-xs">KBZ Bank, Mayanmar</span>
+                </a>
+            </div>
+            <div class="col-sm-6 pull-right" style="padding-top:18px;">
+                <div class="pull-right hidden-xs" style="font-size:11px; color:#a7b4d1;">
+                    Version: KBZ 1.0.0  <span class="seperator">|</span>   User Connect to IP: {{WellcomePageVM.LoginIPAddresses}}  <span class="seperator">|</span>  Last Login IP Addresses: {{WellcomePageVM.LastLoginIPAddresses}}
+                </div>
+            </div>
+        </div>
+        <div class="main-content nomarginleft">
+            <div class="col-sm-12">
+                <div class="col-sm-7">
+                    <h2 class="MyriadProLight">Welcome  {{WellcomePageVM.UserFullName}}</h2>
+                </div>
+                <div class="col-sm-5">
+                    <span class="pull-right padding-top20"><h5><a class="welcomelink" href="#">Out Of Office</a> | <a class="welcomelink" href="/#/Administrator/Admin/UserPasswordChange">Change Password</a> | <a class="welcomelink" href="/Account/LogOff">Logout</a></h5></span>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <button class="btn btn-icon btn-block not-active-a">
+                        <span class="icomoon-user-6" style="color:#6c41d9"></span> <span class="uppercase"> User Name</span>
+                        <h3 class="MyriadProSemibold no-margin uppercase">{{WellcomePageVM.UserName}}</h3>
+                    </button>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-icon btn-block pulsate not-active-a">
+                        <span class="icomoon-enter" style="color:#ff0000"></span> <span class="uppercase"> Last Login</span>
+                        <h3 class="MyriadProSemibold no-margin uppercase">{{WellcomePageVM.LastLoginDate | date : format : timezone}}</h3>
+                    </button>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-icon btn-block not-active-a">
+                        <span class="icomoon-lock-2" style="color:#ffd800"></span> <span class="uppercase"> Last Changed Password</span>
+
+                        <h3 class="MyriadProSemibold no-margin uppercase">{{WellcomePageVM.LastPasswordChangeDate | date : format : timezone}}</h3>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <div class="alert alert-info">
+                        <p>
+                            This system is for the use of authorize users only. Individual using this computer system without authority, or in excess of  their
+                            authority, are subject to having all of their activities on this system monitored and recorded by system personnel.  In the course of
+                            monitoring individuals improperly using this system, or in the course of system maintenance, the activities of authorized users may also
+                            be monitored.  Anyone using this system expressly consents to such monitoring and is advised that if such monitoring reveals possible
+                            evidence of criminal activity, system personnel may provide the evidence of such monitoring to law enforcement officials.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <p class="alert alert-success">
+                        If user satisfied on above information please click
+                    </p>
+                    <a class="btn btn-primary" href="/Account/WelcomePagePost">Continue <span class="icomoon-arrow-right-7"></span></a><br /><br />
+                </div>
+                <div class="col-sm-6">
+                    <p class="alert alert-warning">
+                        If user not satisfied on above information please click mail to system
+                    </p>
+                    <p>
+                        <h4><a class="welcomelink" href="mailto:support@kbz.com?subject=KBZ Bank, Mayanmar & body=Body Text Goes Here!">support@kbz.com</a></h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/Library/bootstrap.min.js"></script>
+</body>
+</html>

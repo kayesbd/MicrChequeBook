@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Verify Email";
+}
+
+
+
+
+
+<div id="middle" class="login_body_bg0" ng-controller="UserResetPasswordController">
+    <div class="container content" style="box-shadow:none; background:none;">
+
+
+        <div class=" col-sm-12">
+            <div class=" col-sm-2"></div>
+            <div class="col-sm-8" style="margin-top:55px; color:#ffffff">
+                <span style="color: #3cc5ee;"><strong> </strong></span><br />
+            </div>
+            <div class=" col-sm-2"></div>
+        </div>
+        
+        @{
+            if (ViewBag.EmailVerify == "True" && ViewBag.ValidEmail == "True" )
+            {
+                <h2>Thank you for verifying your email address. You can login from the following link.</h2>
+    <a href="http://localhost:41247/Account/Login?ReturnUrl=%2f" class="" btn btn-default skyblue btn_pad>Login</a>
+            }
+            else
+            {
+                <h2>Invalid request.</h2>
+            }
+    }
+
+
+
+    </div>
+</div>
+
+
+

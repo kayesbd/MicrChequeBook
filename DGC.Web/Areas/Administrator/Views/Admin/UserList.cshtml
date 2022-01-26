@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+<div class="page-main-header">  </div>
+
+
+
+
+<div class="main-content" style="margin:0;">
+    <div class="container">
+        <div class="page-header">
+            <h1>User List </h1>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="fa fa-00   icomoon-cart-5 " style="color:#19A326"></span>
+                <span style="font-size:medium; color:#243972;">User List </span>
+                @*<div class="panel-tools">
+                       To enter new user information go at
+                    <a href="#/Administrator/Admin/UserDetails/0" ng-href="#/Administrator/Admin/UserDetails/0" class="btn btn-primary btn-h">
+                        <span class="icomoon-arrow-left-5"></span> User Information Setup
+                    </a>
+                </div>*@
+            </div>
+            <div class="panel-body">
+                <form name="bankForm" class="form-horizontal">
+                    <div k-filterable="true" k-pageable="true" id="tblUserList" class="ra-section k-grid k-widget">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

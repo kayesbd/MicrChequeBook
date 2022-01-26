@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+<div class="main-content" style="margin: 0;">
+    <div class="container">
+        <div class="page-header">
+            <h1>Transaction Fee Information</h1>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="fa fa-00   icomoon-cart-5 " style="color: #19A326"></span>
+                <span style="font-size: medium; color: #243972;">Transaction Fee Information</span>
+                @*<div class="panel-tools hidden-700">
+                        To enter new fee information go at
+                        <a href="#/Administrator/Fee/TransactionFeeInformationDetails/0" ng-href="#/Administrator/Fee/TransactionFeeInformationDetails/0" class="btn">
+                            <span class="icomoon-arrow-left-5"></span> Transaction Fee Setup
+                        </a>
+                    </div>*@
+            </div>
+            <div class="panel-body">
+                <form name="policyForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            Select Bank:<span class="mandatory-star"></span>
+                        </label>
+                        <div class="col-sm-3">
+                            <select class="form-control" ng-model="transactionFeePolicyVM.BankCode" name="BankCode" ng-options="item.BankCode as item.BankName for item in BankList"
+                                    ng-class="{ 'error-mark' : policyForm.BankCode.$error.required && submitted }">
+                                <option value="">-- Select --</option>
+                            </select>
+                            <div validation-message ng-show="policyForm.BankCode.$error.required && submitted" class="error">
+                                Bank selection is required
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="button" value="Search" class="btn btn-default" ng-click="getFeePolicies(transactionFeePolicyVM)" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-sm-9 offset3 panel-body table-block" >
+                            <table  class="table table-bordered" ng-show="TransactionFeePolicyList.length>0">
+                                <tr style="background-color: #428bca; color: #fff;">
+                                    <th>Transaction Type</th>
+                                    <th>Fixed Fee Amount</th>
+                                    <th>Fee Amount In Percentage</th>
+                                    <th>Fee Slab Details</th>
+                                </tr>
+                                <tr ng-repeat="policy in TransactionFeePolicyList">
+                                    <td>{{policy.TransactionType}}</td>
+                                    <td>{{policy.FeeAmountFixed}}</td>
+                                    <td>{{policy.FeeAmountInPercentage}}</td>
+                                    <td>
+                                        <input type="button" value="View" class="btn btn-default" ng-show="policy.IsSlabRequired" ng-click="getFeeSlabPolicies(policy)" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="feeSlabPoliciesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 876px; top: 4%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">Transaction Fee Slab Policies</h3>
+            </div>
+            <div class="modal-body col-sm-12 search-criteria details">
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <th>Transaction Fee Policy Id</th>
+                            <th>Description</th>
+                            <th>Min Amount</th>
+                            <th>Max Amount</th>
+                            <th>Segment Amount</th>
+                            <th>Fee Amount Fixed</th>
+                            <th>Fee Amount In Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="slab in TransactionFeeSlabPolicyList">
+                            <td>{{slab.TransactionFeePolicyId}}</td>
+                            <td>{{slab.Description}}</td>
+                            <td>{{slab.MinAmount}}</td>
+                            <td>{{slab.MaxAmount}}</td>
+                            <td>{{slab.SegmentAmount}}</td>
+                            <td>{{slab.FeeAmountFixed}}</td>
+                            <td>{{slab.FeeAmountInPercentage}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="text-align: center">
+            </div>
+        </div>
+    </div>
+</div>

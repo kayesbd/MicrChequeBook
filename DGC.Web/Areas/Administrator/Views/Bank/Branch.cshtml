@@ -1,0 +1,116 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="main-content nomarginleft">
+    <div class="container">
+        <div class="page-header">
+            <h1>Bank Branch Setup</h1>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="fa fa-00 icomoon-coins "></span>
+                        <span style="font-size: medium; color: #243972;">Bank Branch List</span>
+
+                        <div class="panel-tools" style="margin-top: -5px">
+                            <a class="link-bold0" ng-click="addBranch()">
+                                <span class="btn btn-sm btn-success">Add Bank Branch</span>
+                            </a> &nbsp; &nbsp;
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr style="background-color: #243972; color:#fff;">
+                                    <td>Branch Name</td>
+                                    <td>Branch Code</td>
+                                    <td>Select</td>
+                                    <td>Delete</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="Branch in BranchList">
+                                    <td>{{Branch.BranchName}}</td>
+                                    <td>{{Branch.BranchCode}}</td>
+                                    <td><button class="btn btn-table btn-primary" ng-click="edit(Branch)">Select</button></td>
+                                    <td><button class="btn btn-table btn-danger" ng-click="delete(Branch,$index)">Delete</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="branchForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 876px; top:4%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">Branch information</h3>
+            </div>
+            <div class="modal-body col-sm-12 search-criteria details">
+                <form class="form-horizontal" name="branchForm" novalidate enctype="multipart/form-data">
+                    <div validation-summary ng-show="showValidation" class="col-sm-12">
+                    </div>
+                    <input type="hidden" id="RequestVerificationKey" value="" />
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="fa fa-00 icomoon-coins "></span>
+                                <span style="font-size: medium; color: #243972;">Fund Receiver Profile Information</span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4">
+                                                Branch Name:<span class="mandatory-star">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="branchDetailsVM.BranchName" name="Name" required maxlength="50"
+                                                       ng-class="{ 'error-mark' : ((branchDetailsVM.BranchName.$error.required || branchDetailsVM.BranchName.$error.maxlength) && submitted) }"/> @*unique-rolename*@ @*(roleForm.rolename.$error.uniqueRolename == true) ||*@
+                                                <div validation-message ng-show="branchForm.Name.$error.required && submitted" class="error">
+                                                    Name is required
+                                                </div>
+                                                <div validation-message ng-show="branchDetailsVM.BranchName.$error.maxlength && submitted" class="error">
+                                                    Name must be within 50 characters
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4">
+                                                Branch Code:<span class="mandatory-star">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="branchDetailsVM.BranchCode" name="BranchCode" required maxlength="4"
+                                                       ng-class="{ 'error-mark' : ((branchDetailsVM.BranchCode.$error.required || branchDetailsVM.BranchCode.$error.maxlength) && submitted) }" /> @*unique-rolename*@ @*(roleForm.rolename.$error.uniqueRolename == true) ||*@
+                                                    <div validation-message ng-show="branchForm.BranchCode.$error.required && submitted" class="error">
+                                                        Branch Code is required
+                                                    </div>
+                                                    <div validation-message ng-show="branchDetailsVM.BranchCode.$error.maxlength && submitted" class="error">
+                                                        Branch Code must be within 4 characters
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="text-align:center">
+                    @*<hr style="border-color: #f8f8f8;">*@
+                    <button type="button" class="btn btn-primary" ng-click="saveBranchForm(branchForm)"><i class=" icomoon-checkmark-circle-2"></i> Save</button>
+                    <button type="button" class="btn btn-primary" ng-click="closeModel()"><i class="icomoon-cancel-circle"></i>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+

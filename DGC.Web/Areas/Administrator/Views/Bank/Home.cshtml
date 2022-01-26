@@ -1,0 +1,101 @@
+﻿@{
+    Layout = null;
+}
+
+<form class="form-horizontal" name="adminForm">
+    <div class="main-content margin-left-none">
+        <div class="container">
+            <div class="page-header">
+                <h1>Bank Administrator</h1>
+            </div>
+            <div class="row">
+                <br>
+                <div class="col-sm-12" id="customerDetails">
+                    <div class="panel panel-blue">
+                        <div class="panel-heading">
+                            <span class="fa fa-00  icomoon-profile " style="color:#19A326"></span>
+                            <span style="font-size:medium; color:#243972;">Pending Customers</span>
+                            <div class="panel-tools">
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div k-filterable="true" k-pageable="true" id="tblNewCustomerList" class="ra-section k-grid k-widget" style="border:none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="panel panel-blue">
+                    <div class="panel-heading">
+                        <span class="fa fa-00  icomoon-profile " style="color:#19A326"></span>
+                        <span style="font-size:medium; color:#243972;">Recent Transactions</span>
+                        <div class="panel-tools">
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-sm-12">
+                            <div id="tabstrip">
+                                <ul>
+                                    <li class="k-state-active">
+                                        Successful
+                                    </li>
+                                    <li>
+                                        UnSuccessful
+                                    </li>
+
+                                </ul>
+                                <div>
+                                    <div k-filterable="true" k-pageable="true" id="tblTransactionSearchResult"></div>
+
+                                </div>
+                                <div>
+                                    <div k-filterable="true" k-pageable="true" id="showRecentUnsuccessfulTransactionTable"></div>
+                                </div>
+                            </div>
+                            <div k-filterable="true" k-pageable="true" id="tblTransactionSearchResult" class="ra-section k-grid k-widget" style="border:none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

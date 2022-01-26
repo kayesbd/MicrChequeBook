@@ -1,0 +1,86 @@
+﻿@using KBZ.Administration.Domain.Model
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container" style="background:#243972 ">
+        <div class="navbar-header" style="padding:2px 0 10px 0">
+            <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                @*<span class="clip-list-2"></span>*@
+                <span><i class="fa fa-bars"></i></span>
+                
+            </button>
+            <a class="navbar-brand logo-bg-sm-hide" id="navbar-brand  logo-bg-sm-hide" href="http://www.GITS.com" style="height:50px; background-color: #243972 !important; border-bottom: 0 none !important;">
+                <img src="/assets/images/kbz-logo-wh.png" alt="kbz Logo" />
+            </a>
+        </div>
+        @{
+            var loggedInUser = HttpContext.Current.User as KBZ.Utils.Infrastructure.CustomUserPrincipal;
+            if (HttpContext.Current.User != null && loggedInUser != null && HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                if (Session["UserInformation"] != null)
+                {
+                    var loginUserInformation = (UserInformationModel) Session["UserInformation"];
+
+                    <div class="navbar-tools">
+                        <ul class="nav navbar-right">
+
+
+                                @if ((loginUserInformation != null) && (loginUserInformation.IsPasswordExpired.Value == false) && (loginUserInformation.IsNotifyRequiredforPassword.Value) && (loginUserInformation.PasswordExpirationRemainingAge > 0))
+                                {
+                                    @*<script>
+                                        alert("Your password will be expired within @loginUserInformation.PasswordExpirationRemainingAge days. Please change your password.");
+                                    </script>*@
+                                }
+                                <li class="dropdown current-user">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+                                    @*<img src="assets/images/avatar-1-small.jpg" class="circle-img" alt="">*@
+                                    <span class="username">@HttpContext.Current.User.Identity.Name</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @if (loginUserInformation.UserType == KBZ.Utils.App_Start.UserType.BankAdmin.ToString())
+                                    {
+                                        if (Session["BankName"] != null)
+                                        {
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <span class="icomoon-library-2"></span>
+                                                    &nbsp;@Session["BankName"]
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                  
+                                    <li>
+                                        <a href="/#/Administrator/Admin/UserPasswordChange">
+                                            <span class="icomoon-lock-2"></span>
+                                            &nbsp; Change password
+                                        </a>
+                                    </li>
+
+                                    @*<li class="divider"></li>*@
+                                    <li id="Logoff">
+                                        <a href="@Url.Action("LogOff", "Account", new {area = ""})">
+                                            <span class="icomoon-exit"></span>
+                                            &nbsp; Sign Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        @{
+                            const string menu = "~/Views/Shared/_topMenu.cshtml";
+                            Html.RenderPartial(menu);
+                        }
+                        <script>
+                            jQuery(document).ready(function() {
+                                var util = new KBZ.Utils();
+                                util.Menu();
+                            });
+                        </script>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>

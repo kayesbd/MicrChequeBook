@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+
+
+
+<form class="form-horizontal">
+    @Html.Partial("~/Areas/Administrator/Views/Admin/_leftMenuForSuperAdmin.cshtml")
+    <div class="main-content" ng-class="marginleft">
+        <div class="container">
+            <div class="page-header">
+                <h1>All Customer List</h1>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="fa fa-00  icomoon-cart" style="color:#19A326"></span>
+                    <span style="font-size:medium; color:#243972;">All Customer List </span>
+                </div>
+                <div class="panel-body">
+
+                    <div k-filterable="true" k-pageable="true" id="tblBankAccountList" class="ra-section k-grid k-widget">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+

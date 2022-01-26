@@ -1,0 +1,150 @@
+﻿@{
+    Layout = null;
+}
+<div class="main-content" style="margin:0;">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-bold">Transaction Fee Setup</h1>
+        </div>
+        <div class="row">
+            <br>
+            <form class="form-horizontal" name="feeDetailsForm" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="col-sm-12" style="padding:0; margin:0">
+                    <div class="col-sm-12" id="editPanel">
+                        <div validation-summary ng-show="showValidation">
+                        </div>
+                        <input type="hidden" id="RequestVerificationKey" value="" />
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="fa fa-00 icomoon-bars"></span>
+                                <span style="font-size:medium; color:#243972;">Transaction Fee Setup</span>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                Business Category:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="feeInformationVM.BusinessCategoryId" name="BusinessCategoryId" ng-options="item.Id as item.BusinessCategoryName for item in businessCategoryList"
+                                                        ng-change="MerchantCategoryList(feeInformationVM)" required
+                                                        ng-class="{ 'error-mark' : feeDetailsForm.BusinessCategoryId.$error.required && submitted }">
+                                                    <option value="">-- Select --</option>
+                                                </select>
+                                                <div validation-message ng-show="feeDetailsForm.BusinessCategoryId.$error.required && submitted" class="error">
+                                                    Business category selection is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                Transaction Service:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="feeInformationVM.TransactionServiceTypeId" name="TransactionServiceTypeId" ng-options="item.Id as item.Id + ' : ' + item.TransactionServiceTypeName for item in transactionServiceTypeList" required
+                                                        ng-class="{ 'error-mark' : feeDetailsForm.TransactionServiceTypeId.$error.required && submitted }">
+                                                    <option value="">-- Select --</option>
+                                                </select>
+                                                <div validation-message ng-show="feeDetailsForm.TransactionServiceTypeId.$error.required && submitted" class="error">
+                                                    Transaction service selection is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Monthly Fee:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="MonthlyFee" ng-model="feeInformationVM.MonthlyFee" required money-only="money-only" money-length="14"
+                                                       ng-class="{ 'error-mark' : (feeDetailsForm.MonthlyFee.$error.required || (feeDetailsForm.MonthlyFee.$valid == false)) && submitted }" />
+                                                <div validation-message ng-show="feeDetailsForm.MonthlyFee.$error.required && submitted" class="error">
+                                                    Monthly fee amount is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                Merchant Category:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="feeInformationVM.MerchantCategoryId" name="MerchantCategoryId" ng-disabled="!merchantCategoryList"
+                                                        ng-options="item.Id as item.MerchantCategoryName + ' (' + item.MerchantCategoryCode + ') ' for item in merchantCategoryList" required
+                                                        ng-class="{ 'error-mark' : feeDetailsForm.MerchantCategoryId.$error.required && submitted }">
+                                                    <option value="">-- Select --</option>
+                                                </select>
+                                                <div validation-message ng-show="feeDetailsForm.MerchantCategoryId.$error.required && submitted" class="error">
+                                                    Merchant category selection is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                Setup Fee:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="SetupFee" ng-model="feeInformationVM.SetupFee" required money-only="money-only" money-length="14"
+                                                       ng-class="{ 'error-mark' : (feeDetailsForm.SetupFee.$error.required || (feeDetailsForm.SetupFee.$valid == false)) && submitted }" />
+                                                <div validation-message ng-show="feeDetailsForm.SetupFee.$error.required && submitted" class="error">
+                                                    Setup fee amount is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Yearly Fee:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" name="YearlyFee" ng-model="feeInformationVM.YearlyFee" required money-only="money-only" money-length="14"
+                                                       ng-class="{ 'error-mark' : (feeDetailsForm.YearlyFee.$error.required || (feeDetailsForm.YearlyFee.$valid == false)) && submitted }" />
+                                                <div validation-message ng-show="feeDetailsForm.YearlyFee.$error.required && submitted" class="error">
+                                                    Yearly fee amount is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="panel-body center bg-info padding-bottom20 padding-top20 ">
+                                <button type="button" class="btn btn-primary" ng-click="saveFeeInformationDetails(feeDetailsForm)"><span class="icomoon-disk"></span>  Save</button>
+                                <button type="button" class="btn btn-primary" ng-click="clear()"><span class="icomoon-cancel"></span> Clear</button>
+                            </div>
+                        </div>
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="fa fa-00 icomoon-bars-2"></span>
+                                <span style="font-size:medium; color:#243972;"> Transaction Fee Policies </span>
+                                <div class="panel-tools">To enter new fee policy go at
+                                    <a href="#/Administrator/Fee/TransactionFeePolicyDetails/0" ng-href="#/Administrator/Fee/TransactionFeePolicyDetails/0" class="btn">
+                                        <span class="icomoon-arrow-left-5"></span> Fee Policy Setup
+                                    </a>
+                                </div>
+                            </div>
+
+                                <div class="panel panel-default" ng-show="feeInformationVM.HaveAnyFeePolicy == true">
+                                    <div class="panel-body">
+                                        <div k-filterable="true" k-pageable="true" id="tblFeePolicies" class="ra-section k-grid k-widget" style="border:none;">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                        </div>
+
+                            
+                        
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

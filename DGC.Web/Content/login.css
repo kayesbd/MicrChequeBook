@@ -1,0 +1,162 @@
+/* ---------------------------------------------------------------------- */
+/*	Import fonts
+/* ---------------------------------------------------------------------- */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+ 
+/* ---------------------------------------------------------------------- */
+/*	Basic Elements & Classes
+/* ---------------------------------------------------------------------- */
+body {
+	color: #000000;
+	direction: ltr;
+	font-family: 'Open+Sans', sans-serif;
+	font-size: 13px;
+	padding: 0px !important;
+	margin: 0px !important;
+	background: #ffffff;
+}
+a, a:focus, a:hover, a:active {
+	outline: 0 !important;
+}
+
+h1, h2, h3 {
+	font-family: 'Open Sans', Arial, sans-serif;
+    font-weight:300;
+    letter-spacing:-.5px;
+ }
+/* ---------------------------------------------------------------------- */
+/*	Forms
+/* ---------------------------------------------------------------------- */
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+	background-color: #FFFFFF;
+	border: 1px solid #D5D5D5;
+	border-radius: 0 0 0 0 !important;
+	color: #858585;
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 1.2;
+	padding: 5px 4px;
+	transition-duration: 0.1s;
+	box-shadow: none;
+}
+textarea:hover, input[type="text"]:hover, input[type="password"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="date"]:hover, input[type="month"]:hover, input[type="time"]:hover, input[type="week"]:hover, input[type="number"]:hover, input[type="email"]:hover, input[type="url"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="color"]:hover {
+	border-color: #B5B5B5;
+}
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus {
+	border-color: rgba(82, 168, 236, 0.8);
+	box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+	outline: 0 none;
+}
+label {
+	font-weight: normal;
+}
+span.input-icon, span.input-help {
+	display: block;
+	position: relative;
+}
+.input-icon > input {
+	padding-left: 25px;
+	padding-right: 6px;
+}
+.input-icon.input-icon-right > input {
+	padding-left: 6px;
+	padding-right: 25px;
+}
+span.input-help > input {
+	padding-left: 30px;
+	padding-right: 6px;
+}
+.input-icon > [class*="fa-"], .input-icon > [class*="clip-"] {
+	bottom: 0;
+	color: #909090;
+	display: inline-block;
+	font-size: 14px;
+	left: 5px;
+	line-height: 35px;
+	padding: 0 3px;
+	position: absolute;
+	top: 0;
+	z-index: 2;
+}
+
+
+/* ---------------------------------------------------------------------- */
+/*	Login
+/* ---------------------------------------------------------------------- */
+body.login {
+	color: #7F7F7F;
+}
+    body.login.example1 {
+        background-image: url('/Content/Images/bg_2-2.png');
+        
+        background-color: rgba(0, 0, 0, 0);
+    }
+body.login.example2 {
+	 background-image: url('/Content/Images/bg_2-2.png');
+	background-color: rgba(255, 255, 255, 0);
+}
+body.login .main-login {
+	margin-top: 60px;
+}
+body.login .logo {
+	padding: 20px;
+	text-align: center;
+}
+body.login .box-login, body.login .box-forgot, body.login .box-register {
+	background: #FFFFFF;
+	border: 1px solid #d6d6d6;
+	border-radius: 5px;
+	box-shadow: 0px 0px 30px;
+	overflow: hidden;
+	padding: 11%;
+}
+body.login .box-forgot, body.login .box-register {
+	display: none;
+}
+body.login .form fieldset {
+	border: none;
+	margin: 0;
+	padding: 10px 0 0;
+}
+body.login a.forgot {
+	color: #909090;
+	font-size: 12px;
+	position: absolute;
+	right: 10px;
+	text-shadow: 1px 1px 1px #FFFFFF;
+	top: 9px;
+}
+body.login input.password {
+	padding-right: 130px;
+}
+body.login label {
+	color: #7F7F7F;
+	font-size: 14px;
+	margin-top: 5px;
+}
+
+body.login .copyright {
+	font-size: 11px;
+	margin: 0 auto;
+	padding: 10px 10px 0;
+	text-align: center;
+}
+body.login .form-actions:before, body.login .form-actions:after {
+	content: "";
+	display: table;
+	line-height: 0;
+}
+body.login .form-actions:after {
+	clear: both;
+}
+body.login .form-actions {
+	margin-top: 15px;
+	padding-top: 10px;
+	display: block;
+}
+body.login .new-account {
+	border-top: 1px dotted #EEEEEE;
+	margin-top: 15px;
+	padding-top: 10px;
+	display: block;
+}

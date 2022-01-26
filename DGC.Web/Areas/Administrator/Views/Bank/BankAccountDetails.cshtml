@@ -1,0 +1,174 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+<div class="main-content nomarginleft">
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Customer Bank Account Details </h1>
+        </div>
+        <div class="row">
+            <br>
+
+
+            <div class="col-sm-12" style="padding:0; margin:0">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="fa fa-00"></span>
+                            <span style="font-size:medium; color:#243972;">Customer Bank Account Details</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div id="editpanel">
+                                    <div class="col-sm-6">
+
+                                        <input type="hidden" ng-model="bankAccountVM.Id" />
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                Full Name :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="bankAccountVM.FullName" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                Email :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="bankAccountVM.Email" disabled />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                Mobile Number :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="bankAccountVM.MobileNumber" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                Designation :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="bankAccountVM.Designation" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                IP Address :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="bankAccountVM.IPAddress" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+
+                                        <input type="hidden" ng-model="bankAccountVM.Id" />
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                Account Number :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="Address1" ng-model="bankAccountVM.BankAccountNo" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                Bank Name :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="Address1" ng-model="bankAccountVM.BankName" disabled />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                Bin Code :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="bankAccountVM.BinCode" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                Short Code :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="bankAccountVM.BankCode" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">
+                                    </label>
+                                    <div class="col-sm-9">
+
+                                        @{
+                                            if (ViewBag.RoleName == "Maker")
+                                            {
+                                                <button type="button" class="btn btn-primary" ng-click="update()" disabled><span class=" icomoon-cancel-circle"></span> Approve</button>
+
+
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-primary" ng-click="update()"><span class=" icomoon-cancel-circle"></span> Approve</button>
+                                            }
+                                        }
+
+                                        @{
+                                            if (ViewBag.RoleName == "Maker")
+                                            {
+                                                <button type="button" class="btn btn-primary" ng-click="update()" disabled><span class=" icomoon-cancel-circle"></span> Decline</button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-primary" ng-click="inactive()"><span class=" icomoon-cancel-circle"></span> Decline</button>
+                                            }
+                                        }
+
+
+                                        <button type="button" class="btn btn-primary" ng-click="clear()"><span class=" icomoon-cancel-circle"></span> Cancel</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6Lc-Tv8SAAAAAOKEpJBKJKWKT0BxxjaiojMCKj13"></script>
+
+
+
+

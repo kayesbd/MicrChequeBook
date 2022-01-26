@@ -1,0 +1,138 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="main-content margin-left-none">
+    <div class="container">
+
+        <div class="page-header">
+            <h1> Dispute Management </h1>
+        </div>
+
+        <div class="row">
+            <br>
+            <form class="form-horizontal" name="disputeForm" novalidate>
+
+                <div class="col-sm-12">
+                    <input type="hidden" id="RequestVerificationKey" value="" />
+
+                    @*<div validation-summary ng-show="(disputeForm.$dirty && disputeForm.$invalid) || (disputeForm.$invalid && submitted) || (showValidation)">*@
+                    <div validation-summary ng-show="showValidation">
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="fa fa-00 icomoon-question "></span>
+                            <span style="font-size:medium; color:#243972;">Add Dispute</span>
+                            <div class="panel-tools">
+                                <a href="#/Administrator/Admin/Home" ng-href="#/Administrator/Admin/Home" ng-show="IsAdmin == true" class="btn btn-h">
+                                    <span class="icomoon-arrow-left-5"></span> Dashboard
+                                </a>
+                                <a href="#/Administrator/Bank/Home" ng-href="#/Administrator/Bank/Home" ng-show="IsAdmin == false" class="btn btn-h">
+                                    <span class="icomoon-arrow-left-5"></span> Dashboard
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">
+                                            Transaction Id :
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" alphanumeric-only="alphanumeric-only" required name="TranSactionId" ng-model="transactionDetailsVM.TranSactionId" ng-class="{ 'error-mark' : (disputeForm.TranSactionId.$dirty && disputeForm.TranSactionId.$error.required) || (disputeForm.TranSactionId.$error.required && submitted)}" />
+                                            <div validation-message ng-show="(disputeForm.TranSactionId.$dirty && disputeForm.TranSactionId.$error.required) || (disputeForm.TranSactionId.$error.required && submitted)" class="error">
+                                                Transaction Id is required
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">
+                                            Amount :
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" required name="Amount" class="form-control" money-only="money-only" money-length="14" ng-model="transactionDetailsVM.Amount" ng-class="{'error-mark' : (disputeForm.Amount.$dirty && disputeForm.Amount.$error.required) || (disputeForm.Amount.$error.required && submitted)}" />
+                                            <div validation-message ng-show="(disputeForm.Amount.$dirty && disputeForm.Amount.$error.required) || (disputeForm.Amount.$error.required && submitted)" class="error">
+                                                Amount is required
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">
+                                            Date :
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="Date" limit-to="0" required class="form-control" id="claimDate" class="form-control" ng-model="transactionDetailsVM.Date" />
+                                            <div validation-message ng-show="(disputeForm.Date.$dirty && disputeForm.Date.$error.required) || (disputeForm.Date.$error.required && submitted)" class="error">
+                                                Date is required
+                                            </div>
+                                            @*<div validation-message ng-show="DateFormat == true" class="error">
+                                                Please enter a valid Date
+                                            </div>*@
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">
+                                            Time :
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" limit-to="0" id="claimTime" ng-model="transactionDetailsVM.Time" style="width:100%; padding:0; margin:0;" />
+                                        </div>
+                                        @*<div validation-message ng-show="TimeFormat == true" class="error">
+                                            Please enter a valid Time
+                                        </div>*@
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">
+                                            Reason :
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" required name="Reason" class="form-control" ng-model="transactionDetailsVM.Reason" alphanumeric-only="alphanumeric-only" ng-class="{'error-mark' : (disputeForm.Reason.$dirty && disputeForm.Reason.$error.required) || (disputeForm.Reason.$error.required && submitted)}" />
+                                        </div>
+                                        <div validation-message ng-show="(disputeForm.Reason.$dirty && disputeForm.Reason.$error.required) || (disputeForm.Reason.$error.required && submitted)" class="error">
+                                            Reason is required
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="panel-body padding-bottom20 padding-top20">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <button type="button" class="btn btn-primary" ng-click="Save(disputeForm)"><i class=" icomoon-checkmark-circle-2"></i>  Save</button>
+                                        <button type="button" class="btn btn-primary" ng-click="cancel()"><span class=" icomoon-cancel-circle"></span> Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>
+

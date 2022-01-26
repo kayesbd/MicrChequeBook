@@ -1,0 +1,417 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="main-content" style="margin:0;">
+    <div class="container">
+        <div class="page-header">
+            <h1>User Setup</h1>
+        </div>
+        <div class="row">
+            <form class="form-horizontal" name="userForm" novalidate>
+                <div class="col-sm-12" id="editPanel">
+                    <div validation-summary ng-show="(userForm.$dirty && userForm.$invalid) || (userForm.$invalid && submitted) || !isValidated">
+                    </div>
+                    <input type="hidden" id="RequestVerificationKey" value="@AuthUtil.GetAntiForgeryToken()" />
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="fa fa-00  icomoon-info  " style="color:#19A326"></span>
+                            <span style="font-size:medium; color:#243972;"> Personal Information</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">
+                                            Title:
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control selectBox" ng-model="personalInfoVM.Title">
+                                                <option value="">-- Select --</option>
+                                                <option>Mr.</option>
+                                                <option>Mrs.</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="col-sm-3 control-label">
+                                            Middle Name :
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Middle Name" ng-model="personalInfoVM.MiddleName" alphanumeric-only="alphanumeric-only" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="col-sm-3 control-label">
+                                            Mobile :<span class="mandatory-star">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <mob-number id='UserMobileNumber' ng-keydown="UserMobileNumberKeyPress()" name="MobileNumber" class="form-control" ng-class="{ 'error-mark' : (IsRequiredUserMobileNo == true) || (IsExceededLengthUserMobileNo == true) }"></mob-number>
+
+                                            @*<input type="text" class="form-control" id="UserMobileNumber" name="MobileNumber" ng-class="{ 'error-mark' : (IsRequiredUserMobileNo == true) || (IsExceededLengthUserMobileNo == true) }" />*@
+                                            <div validation-message ng-show="IsRequiredUserMobileNo == true" class="error">
+                                                Mobile number is required
+                                            </div>
+                                            <div validation-message ng-show="IsExceededLengthUserMobileNo == true" class="error">
+                                                Mobile number must be within 15 characters
+                                            </div>
+                                            <div validation-message ng-show="IsLessThanMinLengthUserOwnerMobileNo == true" class="error">
+                                                Mobile number is less than 8 digit
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="col-sm-3 control-label">
+                                            User Type :<span class="mandatory-star">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" ng-model="personalInfoVM.UserType" name="UserType" ng-options="item as item for item in userTypeList" required
+                                                    ng-class="{ 'error-mark' : userForm.UserType.$error.required && submitted }">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                            <div validation-message ng-show="userForm.UserType.$error.required && submitted" class="error">
+                                                User type selection is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group " ng-hide="personalInfoVM.UserType != 'BankAdmin'">
+                                        <label class="col-sm-3 control-label">
+                                            Bank :<span class="mandatory-star">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" ng-model="personalInfoVM.BankCode" name="BankCode" ng-options="item.BankCode as item.BankName for item in bankList" ng-required="personalInfoVM.UserType == 'BankAdmin'"
+                                                    ng-class="{ 'error-mark' : userForm.BankCode.$error.required && submitted }">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                            <div validation-message ng-show="userForm.BankCode.$error.required && submitted" class="error">
+                                                Bank selection is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group " ng-hide="personalInfoVM.UserType != 'InstituteAdmin'">
+                                        <label class="col-sm-3 control-label">
+                                            Institution :<span class="mandatory-star">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" ng-model="personalInfoVM.InstitutionId" name="InstitutionId" ng-options="item.Id as item.InstituteName for item in institutionList" ng-required="personalInfoVM.UserType == 'InstituteAdmin'"
+                                                    ng-class="{ 'error-mark' : userForm.InstitutionId.$error.required && submitted }">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                            <div validation-message ng-show="userForm.InstitutionId.$error.required && submitted" class="error">
+                                                Institution selection is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group ">
+                                        <label class="col-sm-3 control-label">
+                                            First Name :<span class="mandatory-star">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="First Name" name="FirstName" ng-model="personalInfoVM.FirstName" required alphanumeric-only="alphanumeric-only"
+                                                   ng-class="{ 'error-mark' : userForm.FirstName.$error.required && submitted }" />
+                                            <div validation-message ng-show="userForm.FirstName.$error.required && submitted" class="error">
+                                                First name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="col-sm-3 control-label">
+                                            Last Name :<span class="mandatory-star">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="Last Name" name="LastName" ng-model="personalInfoVM.LastName" required alphanumeric-only="alphanumeric-only"
+                                                   ng-class="{ 'error-mark' : userForm.LastName.$error.required && submitted }" />
+                                            <div validation-message ng-show="userForm.LastName.$error.required && submitted" class="error">
+                                                Last name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="col-sm-3 control-label">
+                                            Email :<span class="mandatory-star">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" ng-pattern="EMAIL_REGEXP" class="form-control" name="EmailPI" ng-model="personalInfoVM.Email" required ng-maxlength="50"
+                                                   ng-class="{ 'error-mark' : (userForm.EmailPI.$error.required || userForm.EmailPI.$error.maxlength || userForm.EmailPI.$invalid) && submitted }" />
+                                            <div validation-message ng-show="userForm.EmailPI.$error.required && submitted" class="error">
+                                                Email for personal information is required
+                                            </div>
+                                            <div validation-message ng-show="userForm.EmailPI.$error.maxlength && submitted" class="error">
+                                                Email for personal information must be within 50 characters
+                                            </div>
+                                            <div validation-message ng-show="(userForm.EmailPI.$dirty && userForm.EmailPI.$invalid) || (userForm.EmailPI.$invalid && submitted)" class="error ">
+                                                Email for personal information in incorrect format!
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label class="col-sm-3 control-label">Time Zone :<span class="mandatory-star">*</span></label>
+                                        <div class="col-sm-9">
+                                            <select name="UTCTimeId" class="form-control" ng-model="personalInfoVM.UTCTimeId" ng-options="item.Id as item.DisplayName for item in utcTimeZoneList" required
+                                                    ng-class="{ 'error-mark' : userForm.UTCTimeId.$error.required && submitted }">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                            <div validation-message ng-show="userForm.UTCTimeId.$error.required && submitted" class="error">
+                                                Time zone selection is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="fa fa-00  icomoon-vcard"></span>
+                            <span style="font-size:medium; color:#243972;"> User Information</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">
+                                            User Name :<span class="mandatory-star">*</span>
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="UserName" class="form-control" alphanumeric-only="alphanumeric-only" name="username" limit-to="20" autocomplete="off" ng-model="userVM.UserName" required ng-maxlength="50" ng-disabled="userVM.Id > 0"
+                                                   ng-class="{ 'error-mark' : ((userForm.username.$error.required || userForm.username.$error.maxlength) && submitted)}" />  @*unique-username="userVM.Id > 0"*@ @*(userForm.username.$error.uniqueUsername == true) ||*@
+                                                <div validation-message ng-show="userForm.username.$error.required && submitted" class="error">
+                                                    User name is required
+                                                </div>
+                                                <div validation-message ng-show="userForm.username.$error.maxlength && submitted" class="error">
+                                                    User name must be within 20 characters
+                                                </div>
+                                                <div validation-message ng-show="(IsUserNameIsLess==true) && submitted" class="error">
+                                                    Username is less than 8 character
+                                                </div>
+                                                <div validation-message ng-show="(IsUserNameInvalid==true) && submitted" class="error">
+                                                    Please remove "admin" or "administrator" word from the user name.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="userIdForPassword == 0">
+                                            @*ng-show="userIdForPassword == 0"*@
+                                            <label class="col-sm-3 control-label" for="form-field-3">
+                                                Password :<span class="mandatory-star">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control immediate-help" name="Password"
+                                                       autocomplete="off" ng-model="userVM.Password" password-validate required
+                                                       ng-class="{ 'error-mark' : (userForm.Password.$dirty && userForm.Password.$error.required) || (userForm.Password.$error.required && submitted)}" />
+                                                <div class="input-help">
+                                                    <h4>Password must meet the following requirements:</h4>
+                                                    <ul>
+                                                        <li ng-class="pwdHasUpperCaseLetter"><strong>1 uppercase letter</strong></li>
+                                                        <li ng-class="pwdHasLowerCaseLetter"><strong>1 lowercase letter</strong></li>
+                                                        <li ng-class="pwdHasNumber"><strong>1 number</strong></li>
+                                                        <li ng-class="pwdValidLength"><strong>10 characters long</strong></li>
+                                                        <li ng-class="pwdHasSpecialCharacter"><strong>1 special character</strong></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div validation-message ng-show="(userForm.Password.$dirty && userForm.Password.$error.required) || (userForm.Password.$error.required && submitted)" class="error">
+                                                    Password is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group ">
+                                                <label class="col-sm-3 control-label">
+                                                    Password:
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <input type="password" class="form-control" name="Password" ng-model="userVM.Password" password-validate required ng-disabled="userVM.Id > 0"
+                                                           ng-class="{ 'error-mark' : (userForm.Password.$error.required && submitted) ||  }" />
+                                                    <div validation-message ng-show="userForm.Password.$error.required && submitted" class="error">
+                                                        Password dont match with password formate.
+                                                    </div>
+
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Comment :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" ng-model="userVM.Comment" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Is Locked Out :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="checkbox" class="checkbox" ng-model="userVM.IsLockedOut" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Last Password Change Date :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{userVM.LastPasswordChangeDate | date:'medium'}}" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Failed Password Attemp Count :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" ng-model="userVM.FailedPasswordAttemptCount" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Failed Password Answers Attemp Count :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" ng-model="userVM.FailedPasswordAnswerAttemptCount" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Max Failed Password Try Limit :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" ng-model="userVM.MaxFailedPasswordTryLimit" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Is Super Admin :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="checkbox" class="checkbox" ng-model="userVM.IsSuperAdmin" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Profile change (Yes/No) :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="checkbox" class="checkbox" ng-model="userVM.ProfileChangedYN" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Role :<span class="mandatory-star">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="userVM.RoleId" name="RoleId" ng-options="item.Id as item.RoleName for item in roleList" required
+                                                        ng-class="{ 'error-mark' : userForm.RoleId.$error.required && submitted }">
+                                                    <option value="">-- Select --</option>
+                                                </select>
+                                                <div validation-message ng-show="userForm.RoleId.$error.required && submitted" class="error">
+                                                    Role selection is required
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Password Age (days) :<span class="mandatory-star">*</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" ng-model="userVM.PasswordAge" id="PasswordAge" numbers-only="numbers-only" />
+                                                <div validation-message ng-show="(IsPasswordAgeZero == true) && submitted" class="error">
+                                                    Invalid Password Age
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Is Approved :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="checkbox" class="checkbox" ng-model="userVM.IsApproved" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Last Login Date :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{userVM.LastLoginDate | date:'medium'}}" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Last Lock-out Date :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{userVM.LastLockOutDate | date:'medium'}}" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Failed Password Attempt Window Start :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{userVM.FailedPasswordAttemptWindowStart | date:'medium'}}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Failed Password Answers Attempt Window Start :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{userVM.FailedPasswordAnswerAttemptWindowStart | date:'medium'}}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Is Logged In :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="checkbox" class="checkbox" ng-model="userVM.IsLoggedIn" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Password (Yes/No) :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="checkbox" class="checkbox" ng-model="userVM.PasswordChangedYN" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="fa fa-00 icomoon-profile"></span>
+                                <span style="font-size:medium; color:#243972;">User Status</span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                Active / Inactive :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="checkbox" class="checkbox" ng-model="userVM.IsActive" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary" ng-click="saveUser(userForm)"><i class=" icomoon-checkmark-circle-2"></i> Save</button>
+                            <button type="button" class="btn btn-primary" ng-click="cancel()"><span class=" icomoon-cancel-circle"></span> Cancel</button>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+

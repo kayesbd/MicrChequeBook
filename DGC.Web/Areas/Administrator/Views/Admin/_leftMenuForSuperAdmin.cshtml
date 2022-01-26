@@ -1,0 +1,16 @@
+﻿@{
+
+    var userInfo = System.Threading.Thread.CurrentPrincipal as KBZ.Utils.Infrastructure.CustomUserPrincipal;
+    if (userInfo.UserType == KBZ.Administration.Domain.Model.UserType.SystemAdmin.ToString())
+    {
+        <div id="bankMenu" class="navbar-content" style="position:fixed;">
+            <div class="main-navigation navbar-collapse collapse" id="bankMenu">
+                <br /><br />
+                <ul class="main-navigation-menu" ng-repeat="menu in BankSubmenu | orderBy: 'Order'">
+                    <li><a ng-href="{{ menu.URL }}"><i class="{{ menu.Icon }}"></i>{{ menu.Title }}</a></li>
+                </ul>
+            </div>
+        </div>
+    }
+
+}

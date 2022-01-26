@@ -1,0 +1,173 @@
+﻿@using KBZ.Security.Domain.Model
+@{
+}
+
+
+<div class="main-content nomarginleft">
+    <div class="container">
+
+        <div class="page-header">
+            <h1></h1>
+        </div>
+        <div class="row">
+            <br>
+
+
+            <div class="col-sm-12" ng-app="VerifyEmailAndMobileNumber">
+                <div class="panel panel-default" ng-controller="CustomerStep2RegistrationController">
+                    <div class="panel-heading">
+                        <span class="fa fa-00  icomoon-user "></span>
+                        <span style="font-size:medium; color:#243972;">Mobile and Email Verification</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-sm-12">
+                            <div class="col-sm-10">
+                                @if (Session["UserInformation"] != null)
+                                {
+                                    var loginUserInformation = (UserInformationModel)Session["UserInformation"];
+
+                                    if (loginUserInformation != null && !loginUserInformation.IsEmailVerified)
+                                    {
+                                        <form class="form-horizontal" name="emailVerificationForm" novalidate>
+                                            <input type="hidden" id="RequestVerificationKey" value="@AuthUtil.GetAntiForgeryToken()" />
+                                            <div id="editPanel">
+                                                <div id="customerDetails">
+                                                    <div validation-summary ng-show="showValidation">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">
+                                                        </label>
+                                                        <div class="col-sm-9">
+                                                            <h4>A Email with your code has been sent to your Email Address</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">
+                                                            Email Verification Code :
+                                                        </label>
+                                                        <div class="col-sm-7">
+                                                            <input ng-disabled="isEmailAddressVerified" class="form-control" type="text" name="EmailVerificationPIN" ng-model="userInformationVerificationrVM.EmailVerificationPIN" required ng-maxlength="20" ng-class="{ 'error-mark' : (emailVerificationForm.EmailVerificationPIN.$error.required || emailVerificationForm.EmailVerificationPIN.$error.maxlength) && submitted }" />
+                                                            <div validation-message ng-show="emailVerificationForm.EmailVerificationPIN.$invalid && submitted" class="error">
+                                                                Email Verification Code is required
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button type="button" class="btn btn-default" ng-click="verifyEmailAddress(emailVerificationForm)"><span class="icomoon-envelop"></span>  Verify Email Address</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    }
+
+                                    else
+                                    {
+                                        <input type="checkbox" id="isEmailAddressVerified" checked="checked" style="display: none" />
+                                    }
+                                    if (loginUserInformation != null && !loginUserInformation.IsMobileVerified)
+                                    {
+
+                                        <form class="form-horizontal" name="mobileVerificationForm" novalidate>
+                                            <input type="hidden" id="RequestVerificationKey" value="@AuthUtil.GetAntiForgeryToken()" />
+                                            <div id="editpanel">
+                                                <div id="customerDetails">
+                                                    <div validation-summary ng-show="showValidation1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">
+                                                        </label>
+                                                        <div class="col-sm-9">
+                                                            <h4>A text message with your code has been sent to your mobile number</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">
+                                                            Mobile Verification Code :
+                                                        </label>
+                                                        <div class="col-sm-7">
+                                                            <input ng-disabled="isMobileNumberVerified" class="form-control" type="text" name="MobileVerificationCode" ng-model="userInformationVerificationrVM.MobileNumberVerificationPIN" required ng-maxlength="20" ng-class="{ 'error-mark' : (mobileVerificationForm.MobileVerificationCode.$error.required || mobileVerificationForm.MobileVerificationCode.$error.maxlength) && submitted }" />
+                                                            <div validation-message ng-show="mobileVerificationForm.MobileVerificationCode.$invalid && submitted" class="error">
+                                                                Mobile Verification Code is required
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button type="button" class="btn btn-default" ng-click="verifyMobileNumber(mobileVerificationForm)"><span class="icomoon-mobile"></span>  Verify mobile number</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+
+
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="isMobileNumberVerified" checked="checked" style="display: none" />
+                                    }
+                                }
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <br />
+                                        <button type="button" class="btn btn-primary" ng-click="nextForm()" ng-disabled="!isMobileNumberVerified || !isEmailAddressVerified"><span class="icomoon-arrow-right-6"></span> Next</button>
+                                        <button type="button" class="btn btn-primary" ng-click="cancel()"><span class=" icomoon-cancel-circle"></span> Cancel</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog " style="width:  500px;">
+                                <div class="modal-content">
+                                    <div class="modal-header alert alert-success" style="padding-bottom: 26px;  padding-top: 7px;padding-left: 15px;">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                                        <span style=" float: left; font-size: 15px;">Success</span>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="modal-title icomoon-checkmark-3 success" style="font-size: 28px; float: left; color: #47A446;" id="successModaltitleText"></span>
+                                        {{successModalText}}
+                                        @*<p id="successModalText"></p>*@
+                                        <br />
+                                        <button type="button" class="btn btn-success btn-lg" data-dismiss="modal" style="border-radius: 5px; font-size: 12px; padding-top: 8px; padding-left: 16px;vertical-align: central ">Ok</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade " id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog " style="width: 500px;">
+                                <div class="modal-content">
+                                    <div class="modal-header alert alert-danger" style="padding-bottom: 26px;  padding-top: 7px;padding-left: 15px;">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                                        <span style=" float: left; font-size: 15px;">Error</span>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="modal-title icomoon-warning-2" style="font-size: 28px; float: left; color: #D2322D;" id="errorModaltitleText"></span>
+                                        <p id="errorModalText"></p>
+                                        <br />
+                                        <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal" style="border-radius: 5px; font-size: 12px; padding-top: 8px; padding-left: 16px;">Ok</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+    

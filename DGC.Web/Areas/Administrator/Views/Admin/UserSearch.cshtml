@@ -1,0 +1,145 @@
+﻿@{
+    Layout = null;
+}
+        
+        
+<div class="main-content" style="margin:0;">
+    <div class="container">
+
+        <div class="page-header">
+            <h1>User Search</h1>
+        </div>
+
+        <div class="row">
+            <br>
+            <form class="form-horizontal" name="userForm" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="col-sm-12" style="padding:0; margin:0">
+                    <div class="col-sm-12" id="editPanel">
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="fa fa-00 icomoon-search-4"></span>
+                                <span style="font-size:medium; color:#243972;">Search Criteria</span>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                User Name:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="userSearchVM.UserName" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">
+                                                First Name:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="userSearchVM.FirstName" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Last Name:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="userSearchVM.LastName" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Mobile Number:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="userSearchVM.MobileNumber" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Bank Name :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select name="BankId" class="form-control" ng-model="userSearchVM.FromBankCode" ng-options="a.BankCode as a.BankName for a in bankList">
+                                                    <option value="">-- Select --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                User Type :
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" ng-model="userSearchVM.UserType" name="UserTypeId" ng-options="item as item for item in userTypeList">
+                                                    <option value="">-- Select User Type --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Status :
+                                            </label>
+                                            <div class="col-sm-9 control-label">
+                                                <input type="checkbox" class="icheckbox_square-grey ng-pristine ng-valid" ng-model="userSearchVM.IsApproved" /><span style="float: left;">Approved / Not</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="col-sm-3 control-label">
+                                                Email:
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="userSearchVM.Email" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="panel-body center bg-info padding-bottom20 padding-top20 ">
+                                <button type="button" class="btn btn-primary" ng-click="userSearch()"><span class="icomoon-search-2"></span>  Search</button>
+                                <button type="button" class="btn btn-primary" ng-click="cancel()"><span class=" icomoon-cancel-circle"></span> Cancel</button>
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+                        <div class="panel panel-default">
+                            @*<div class="panel-heading">
+                                    <span class="fa fa-00  icomoon-menu-5"></span>
+                                    <span style="font-size:medium; color:#243972;">Menu Allocation for this Role</span>
+                                </div>*@
+
+
+                            <div class="panel-body">
+                                <div k-filterable="true" k-pageable="true" id="tblUserSearchList" class="ra-section k-grid k-widget">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>

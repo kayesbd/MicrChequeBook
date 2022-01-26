@@ -1,0 +1,5 @@
+﻿<div id="bankMenu" class="col-sm-2 left-menu">
+    <ul class="page-sidebar-menu" ng-repeat="menu in BankSubmenu | orderBy: 'Order'">
+        <li><a ng-href="{{ menu.URL }}"><i class="{{ menu.Icon }}"></i>{{ menu.Title }}</a></li>
+    </ul>
+</div>

@@ -1,0 +1,4 @@
+﻿namespace NusPay.GateWayInterface.Models
+{
+  
+}

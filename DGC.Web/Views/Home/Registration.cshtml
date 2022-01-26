@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Enter User Information</legend>
+
+            <div class="form-group">
+                <label class="col-md-2">User Name</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="userName" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2">Password</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="password" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2">Status</label>
+                <div class="col-md-3">
+                    <input type="checkbox" class="form-control" name="status" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Update" class="btn btn-primary btn-block" />
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Reset" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+

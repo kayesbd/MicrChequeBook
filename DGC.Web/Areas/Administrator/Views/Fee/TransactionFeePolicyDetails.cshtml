@@ -1,0 +1,123 @@
+﻿@{
+    Layout = null;
+}
+<div class="main-content nomarginleft">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-bold">Fee Policy </h1>
+        </div>
+        <div class="row">
+            <br>
+            <form class="form-horizontal" name="feePolicyDetailsForm" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="col-sm-12" style="padding:0; margin:0">
+                    <div class="col-sm-12">
+                        <div validation-summary ng-show="showValidation">
+                        </div>
+                        <input type="hidden" id="RequestVerificationKey" value="" />
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span class="fa fa-00 icomoon-bars"></span>
+                                <span style="font-size:medium; color:#243972;">Fee Policy Information</span>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="col-sm-12">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3">
+                                                    Policy Name:
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" ng-model="feePolicyVM.TransactionFeePolicyName" name="TransactionFeePolicyName" required maxlength="200"
+                                                           ng-class="{ 'error-mark' : ((feePolicyDetailsForm.TransactionFeePolicyName.$error.required || feePolicyDetailsForm.TransactionFeePolicyName.$error.maxlength) && submitted) }" />
+                                                    <div validation-message ng-show="feePolicyDetailsForm.TransactionFeePolicyName.$error.required && submitted" class="error">
+                                                        Policy name is required
+                                                    </div>
+                                                    <div validation-message ng-show="feePolicyDetailsForm.rolename.$error.maxlength && submitted" class="error">
+                                                        Policy name must be within 200 characters
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3">
+                                                    Amount From:
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <input type="number" class="form-control" id="txtAmountFrom" name="AmountFrom" ng-model="feePolicyVM.AmountFrom" required ng-maxlength="18" ng-pattern="onlyNumbers"
+                                                           ng-class="{ 'error-mark' : (feePolicyDetailsForm.AmountFrom.$error.required || feePolicyDetailsForm.AmountFrom.$error.maxlength || (feePolicyDetailsForm.AmountFrom.$valid == false)) && submitted }" />
+                                                    <div validation-message ng-show="feePolicyDetailsForm.AmountFrom.$error.required && submitted" class="error">
+                                                        From amount is required
+                                                    </div>
+                                                    <div validation-message ng-show="feePolicyDetailsForm.AmountFrom.$error.maxlength && submitted" class="error">
+                                                        From amount must be within 18 characters
+                                                    </div>
+                                                    <div validation-message ng-show="(feePolicyDetailsForm.AmountFrom.$valid == false) && submitted" class="error">
+                                                        From amount allows only numbers
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3">
+                                                    Transaction Fee:
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <input type="number" class="form-control" name="TransactionFee" ng-model="feePolicyVM.TransactionFee" required ng-maxlength="18" ng-pattern="onlyNumbers"
+                                                           ng-class="{ 'error-mark' : (feePolicyDetailsForm.TransactionFee.$error.required || feePolicyDetailsForm.TransactionFee.$error.maxlength || (feePolicyDetailsForm.TransactionFee.$valid == false)) && submitted }" />
+                                                    <div validation-message ng-show="feePolicyDetailsForm.TransactionFee.$error.required && submitted" class="error">
+                                                        Transaction fee amount is required
+                                                    </div>
+                                                    <div validation-message ng-show="feePolicyDetailsForm.TransactionFee.$error.maxlength && submitted" class="error">
+                                                        Transaction fee amount must be within 18 characters
+                                                    </div>
+                                                    <div validation-message ng-show="(feePolicyDetailsForm.TransactionFee.$valid == false) && submitted" class="error">
+                                                        Transaction fee amount allows only numbers
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-5">
+                                                Is Calculated in Percentage:
+                                            </label>
+                                            <div class="col-sm-1">
+                                                <input type="checkbox" class="checkbox" ng-model="feePolicyVM.IsPercentage" />
+                                            </div>
+                                            <label class="control-label col-sm-3">
+                                                Amount To:
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input type="number" class="form-control" id="txtAmountTo" name="AmountTo" ng-model="feePolicyVM.AmountTo" required ng-maxlength="18" ng-pattern="onlyNumbers"
+                                                       ng-class="{ 'error-mark' : (feePolicyDetailsForm.AmountTo.$error.required || feePolicyDetailsForm.AmountTo.$error.maxlength || (feePolicyDetailsForm.AmountTo.$valid == false)) && submitted || IsMaxLow==true}" />
+                                                <div validation-message ng-show="feePolicyDetailsForm.AmountTo.$error.required && submitted" class="error">
+                                                    To amount is required
+                                                </div>
+                                                <div validation-message ng-show="feePolicyDetailsForm.AmountTo.$error.maxlength && submitted" class="error">
+                                                    To amount must be within 18 characters
+                                                </div>
+                                                <div validation-message ng-show="(feePolicyDetailsForm.AmountTo.$valid == false) && submitted" class="error">
+                                                    To amount allows only numbers
+                                                </div>
+                                                <div validation-message ng-show="IsMaxLow" class="error">
+                                                    To amount should be greater than from amount
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body center bg-info padding-bottom20 padding-top20 ">
+                                    <button type="button" class="btn btn-primary" ng-click="saveFeePolicyInformation(feePolicyDetailsForm)"><span class=" icomoon-disk"></span> Save</button>
+                                    <button type="button" class="btn btn-primary" ng-click="cancel()"><span class=" icomoon-cancel"></span> Clear</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+

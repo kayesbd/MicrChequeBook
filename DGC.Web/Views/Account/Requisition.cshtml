@@ -1,0 +1,192 @@
+﻿@model KBZ.DAL.Common.Requisition
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Requisition</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <input type="hidden" ng-model="bc.ID" name="ID" id="ID" />
+        <label class="control-label col-md-2">Account Number</label>
+
+        <div class="col-md-3">
+            <input type="text" id="AccountNumber" name="AccountNumber" class="form-control" ng-model="bc.AccountNumber" />
+            @*@Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">No Of Leaf</label>
+        <div class="col-md-1">
+            <select name="NoOfLeaf" class="form-control" ng-model="bc.NoOfLeaf"
+                    ng-options="a.Id as a.ChequeNoOfLeaf for a in NoOfLeafs">
+
+                <option value="">-- Select --</option>
+
+            </select>
+            @*@Html.EditorFor(model => model.SerialNoOfCheq1, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.SerialNoOfCheq1, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label col-md-2">Requsition Slip Serial Number</label>
+        <div class="col-md-3">
+            <input type="text" id="RequsitionSlipSerialNumber" name="RequsitionSlipSerialNumber"
+                   class="form-control" ng-model="bc.RequsitionSlipSerialNumber" />
+            @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SerialNoOfCheq2, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">NRC Person</label>
+        <div class="col-md-3">
+            <input type="text" id="NRCPerson" name="NRCPerson" class="form-control" ng-model="bc.NRCPerson" />
+            @*@Html.EditorFor(model => model.ChequeBookType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ChequeBookType, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Cheque Book Pickup Branch</label>
+        <div class="col-md-1">
+            @*<input type="text" id="ChequeBookPickupBranch" name="ChequeBookPickupBranch" class="form-control" />*@
+            <select name="ChequeBookPickupBranch" class="form-control" ng-model="bc.ChequeBookPickupBranch"
+                    ng-options="a.Id as a.BranchName for a in BranchList">
+
+                <option value="">-- Select --</option>
+
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Enter Full Digit Account Number</label>
+        <div class="col-md-3">
+            <input type="text" id="AccountNumber" name="AccountNumber" class="form-control" ng-model="bc.AccountNumber" />
+            @*@Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Enter Serial No of Cheque (Last One)</label>
+        <div class="col-md-3">
+            <input type="text" id="EnterSerialNoofCheque1" name="EnterSerialNoofCheque1" class="form-control" ng-model="bc.EnterSerialNoofCheque1" />
+            @*@Html.EditorFor(model => model.SerialNoOfCheq1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SerialNoOfCheq1, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <label class="control-label col-md-2">Enter Serial No of Cheque (Last Second One)</label>
+        <div class="col-md-3">
+            <input type="text" id="EnterSerialNoofCheque2" name="EnterSerialNoofCheque2"
+                   class="form-control" ng-model="bc.EnterSerialNoofCheque2" />
+            @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SerialNoOfCheq2, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Agree on terms and condition</label>
+        <div class="col-md-2">
+            <input type="checkbox" id="AgreeOnTermsAndCondition" ng-model="bc.AgreeOnTermsAndCondition" name="AgreeOnTermsAndCondition" class="form-control" />
+        </div>
+    </div>  
+    <div class="form-group">
+        <a href="#" ng-click="PopUPTermsAndCondition()" class="control-label col-md-2">Terms and Condition</a>
+        @*<div class="col-md-10">
+                @Html.EditorFor(model => model.NRCPerson, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NRCPerson, "", new { @class = "text-danger" })
+            </div>*@
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.DesiredPickupBranchId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DesiredPickupBranchId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DesiredPickupBranchId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DeliveryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DeliveryDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DeliveryDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DeliveredBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DeliveredBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DeliveredBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ModifiedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" ng-click="saveRequisitionForm(bc)" value="Continue" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

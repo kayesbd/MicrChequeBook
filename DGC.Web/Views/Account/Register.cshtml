@@ -1,0 +1,150 @@
+﻿@model KBZ.Security.Domain.Model.PersonalInformationModel
+
+
+<!DOCTYPE html>
+<html style="position: relative;
+  min-height: 100%!important;">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KBZ Cheque Management System.</title>
+    <link rel="shortcut icon" href="~/Content/Images/favicon.ico" />
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/assets/css/MyraidPro.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/assets")
+    @Styles.Render("~/Content/KendoCss")
+    <link href="~/Content/flags.css" rel="stylesheet" />
+    <link href="~/Content/dd.css" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/Library/jquery-2.1.0.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/Library/intlTelInput.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/Library/angular.js")"></script>
+    <script src="@Url.Content("~/Scripts/Library/angular-route.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/Library/angular-cookies.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/Library/ui-bootstrap-tpls-0.10.0.js")"></script>
+    <script src="~/Scripts/Library/ng-flow-standalone.min.js"></script>
+    @*Materialize*@
+    @*<link href="~/assets/materialize/css/materialize.css" rel="stylesheet" media="screen,projection" />
+        <script src="~/assets/materialize/js/materialize.js"></script>*@
+    <link href="~/Content/intlTelInput.css" rel="stylesheet" />
+    @Scripts.Render("~/Scripts/KendoJs")
+    <script src="@Url.Content("~/Scripts/Library/respond.js")"></script>
+    <script src="@Url.Content("~/Scripts/app.js")"></script>
+    <script src="@Url.Content("~/Scripts/utils.js")"></script>
+    @Scripts.Render("~/bundles/Scripts/Directive")
+    @Scripts.Render("~/bundles/Scripts/Admin")
+    @Scripts.Render("~/bundles/Scripts/Client")
+    @Scripts.Render("~/bundles/Scripts/Transaction")
+    @*@Scripts.Render("~/Scripts/KendoJs")*@
+    @Styles.Render("~/Content/KendoCss")
+
+    <script src="~/Scripts/Library/jquery-ui.js"></script>
+    <script src="~/Scripts/Library/bootstrap.min.js"></script>
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" />
+    <link href=@Url.Content("~/Content/examples/content/shared/styles/examples-offline.css") rel="stylesheet" />
+    <link href="~/assets/css/icomoon.css" rel="stylesheet" />
+    <link href="~/Content/styles/kendo.default.min.css" rel="stylesheet" />
+    <link href="~/Content/angular-timeline.css" rel="stylesheet" />
+    <script src="~/Scripts/tab_switch.js"></script>
+    @*<script src="https://www.google.com/recaptcha/api.js?onload=vcRecapthaApiLoaded&render=explicit" async defer></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/angular-recaptcha.js")"></script>*@
+
+    <script src="~/Scripts/Library/angular-timeline.js"></script>
+
+
+</head>
+
+<body ng-app="NusPayApp" class="layout-boxed-body" data-offset="40" style="background-color: white !important;min-height: 100%!important;  padding-bottom:35px !important">
+    <header ng-controller="LayoutPageCtrl">
+        @{
+            const string header = "~/Views/Shared/_Header.cshtml";
+            Html.RenderPartial(header);
+        }
+    </header>
+    <div style="display:inline;align-self:center;align-content:center;" class="layout-boxed-body00">
+        <div class="container">
+            <form action="/Account/SaveRegister" class="form-horizontal">
+                <h4>Create a new account.</h4>
+                <hr />
+
+                @*<div class="form-group">
+                    <label class="col-md-2 control-label">Mobile</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="MobileNumber" id="MobileNumber" value="@Model.MobileNumber" /><label class="col-md-4">(User Name)</label>
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Email</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="Email" id="Email" value="@Model.Email" />
+                    </div>
+                     <label  class="col-md-6 control-label"  value="[User Name]" />
+                    
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Full Name</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="FullName" id="FullName" value="@Model.FullName" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Account Number</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="AccountNumber" id="AccountNumber" value="@Model.AccountNumber" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Password</label>
+                    <div class="col-md-3">
+                        <input type="password" class="form-control" name="Password" id="Password" value="@Model.Password" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Confirm Password</label>
+                    <div class="col-md-3">
+                        <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword" value="@Model.ConfirmPassword" />
+                    </div>
+                </div>
+                @*<div class="form-group">
+                    <label class="col-md-2 control-label">Customer Status</label>
+                    <div class="col-md-3">
+                        <input type="password" class="form-control" readonly="readonly" name="ConfirmPassword" id="ConfirmPassword" value="New" />
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-3">
+                        <input type="submit" class="btn btn-default" value="Register" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="sticky-footer" style=" background-color: #243972 !important; margin-left: -50px !important;">
+        <div class="container">
+            &nbsp;&nbsp;&nbsp; &copy; 2019-
+            <script>document.write(new Date().getFullYear());</script>  KBZ Bank Ltd.
+        </div>
+    </footer>
+    @Styles.Render("~/Content/assets")
+    <script src="~/assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+    <script src="~/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/assets/js/login.js"></script>
+    <script src="~/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery("#menu li a").click(function (event) {
+                // check if window is small enough so dropdown is created
+                jQuery("#nav-collapse").removeClass("in").addClass("collapse");
+            });
+        });
+    </script>
+
+</body>
+</html>
+<script src="@Url.Content("~/Scripts/Library/jquery.dd.min.js")"></script>
+
+
+
+
+
+

@@ -1,0 +1,272 @@
+﻿
+/***
+Mega Menu
+***/
+.mega-menu .mega-menu-submenu {  
+  border-right: 1px solid #656565;
+}
+
+.mega-menu .mega-menu-submenu li h3 {  
+  color: #fff;
+}
+
+/***
+Page sidebar
+***/
+.page-content {
+  border-left: 1px solid #e2e2e2 !important;
+  border-bottom: 1px solid #e2e2e2 !important;
+}
+.page-sidebar-reversed .page-content {
+  border-left: 0;
+  border-right: 1px solid #e2e2e2 !important;
+}
+.page-sidebar {
+  background-color: #fafafa;
+}
+.page-sidebar-fixed .page-content {
+  border: 0 !important;
+}
+.page-sidebar-fixed .page-sidebar {
+  border-right: 1px solid #e2e2e2 !important;
+}
+
+
+ul.page-sidebar-menu > li > a {
+  /*border-top: 1px solid #e2e2e2 !important;*/
+  color: #414042 !important;
+  font-weight: 400;
+}
+
+ul.page-sidebar-menu > li:first-child > a {
+   border-top: 1px solid transparent !important;
+}
+
+ul.page-sidebar-menu > li:last-child > a {
+   border-bottom: 1px solid transparent !important;
+}
+
+ul.page-sidebar-menu > li a i {
+  color: #bbb !important;
+}
+ul.page-sidebar-menu > li.open > a,
+ul.page-sidebar-menu > li > a:hover,
+ul.page-sidebar-menu > li:hover > a {
+  background: #e1e1e1;
+  border-top: 1px solid #e8e8e8;
+  width:100%;
+  min-width:100%;
+}
+ul.page-sidebar-menu > li.active > a .selected {
+  right:-7px;
+  top:0px;
+  width: 7px;
+  height: 39px;
+  background-image: url("../../img/sidebar-menu-arrow-green.png");
+}  
+.page-sidebar-reversed ul.page-sidebar-menu > li.active > a .selected {
+  right: auto;
+  left:-7px;
+  background-image: url("../../img/sidebar-menu-arrow-green-reverse.png");
+} 
+ul.page-sidebar-menu > li.active i {
+  color: #fff !important;
+}
+.page-sidebar-fixed ul.page-sidebar-menu > li.active > a .selected {
+  display: none;
+}
+ul.page-sidebar-menu > li.active > a{
+  background: #0093d7 !important;
+  border-top-color: transparent !important;
+  color:#fff !important;
+}  
+ul.page-sidebar-menu > li.active > a i {
+  color: #fff;
+}
+ul.page-sidebar-menu > li > a > .arrow:before,
+ul.page-sidebar-menu > li > a > .arrow.open:before {
+  color: #ccc !important;
+}
+ul.page-sidebar-menu > li.active > a .arrow:before, 
+ul.page-sidebar-menu > li.active > a .arrow.open:before {
+  color: #fff !important;
+}
+ul.page-sidebar-menu > li > ul.sub-menu > li:first-child > a {
+  border-top: 0px !important;
+}
+
+ul.page-sidebar-menu ul.sub-menu > li > a {
+  font-weight: 400 !important;
+  color: #333 !important;
+}
+ul.page-sidebar-menu ul.sub-menu > li.active > a,
+ul.page-sidebar-menu ul.sub-menu > li > a:hover {
+  color: #818181 !important;
+  background: #efefef !important; 
+}
+
+ul.page-sidebar-menu > li > ul.sub-menu a .arrow:before,
+ul.page-sidebar-menu > li > ul.sub-menu a .arrow.open:before {
+  color: #ccc !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page-sidebar-menu_bg {background: rgb(229,229,229); /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U1ZTVlNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk5JSIgc3RvcC1jb2xvcj0iI2ZlZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: -moz-linear-gradient(top,  rgba(229,229,229,1) 0%, rgba(254,255,255,1) 99%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(229,229,229,1)), color-stop(99%,rgba(254,255,255,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(229,229,229,1) 0%,rgba(254,255,255,1) 99%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(229,229,229,1) 0%,rgba(254,255,255,1) 99%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(229,229,229,1) 0%,rgba(254,255,255,1) 99%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(229,229,229,1) 0%,rgba(254,255,255,1) 99%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e5', endColorstr='#feffff',GradientType=0 ); /* IE6-8 */
+}
+
+
+
+
+
+.page-sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin: 0;
+  padding: 0;
+  border:none; 
+}
+
+.page-sidebar-menu > li {
+  display: block;
+  margin: 0;
+  padding: 0; 
+  border: 0px;
+}
+
+.page-sidebar-menu > li.start > a {
+   border-top-color: transparent !important;
+}
+
+.page-sidebar-menu > li:last-child > a,
+.page-sidebar-menu > li.last > a {
+   border-bottom-color: transparent !important;
+}
+
+.page-sidebar-menu > li > a {
+  display: block;
+  position: relative;
+  margin: 0;
+  border: 0px;
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.page-sidebar-fixed .page-sidebar-menu > li > a {
+  -webkit-transition: all 0.2s ease;
+     -moz-transition: all 0.2s ease;
+       -o-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+}
+
+.page-sidebar-reversed.page-sidebar-fixed .page-sidebar-menu > li > a{
+     -webkit-transition: none;
+        -moz-transition: none;
+          -o-transition: none;
+             transition: none;
+}
+
+.page-sidebar-menu > li > a i {
+  font-size: 16px;
+  margin-right: 5px;
+  text-shadow:none; 
+}
+
+.page-sidebar-menu > li.break {
+  margin-bottom: 20px;
+}
+
+.page-sidebar-menu > li.open > a {
+  font-size: 14px;
+}
+
+.page-sidebar-menu > li.active > a {
+  border: none; 
+  text-shadow:none;
+  font-size: 14px;
+}  
+
+.page-sidebar-menu > li.active > a .selected {
+  display: block;
+  width: 8px;
+  height: 25px;
+  background-image: url("../img/sidebar-menu-arrow.png");
+  float: right;
+  position: absolute;
+  right:0px;
+  top:8px;
+}
+
+.page-sidebar-reversed .page-sidebar-menu > li.active > a .selected {
+  background-image: url("../img/sidebar-menu-arrow-reverse.png");
+  right: auto;
+  left:0;
+}
+
+.page-sidebar ul > li > a > .arrow:before {  
+   float: right;
+   margin-top: 0px;
+   margin-right: 5px;
+   display: inline;
+   font-size: 16px;
+   font-family: FontAwesome;
+   height: auto;
+   content: "\f104";
+   font-weight: 300;
+   text-shadow:none;
+}
+
+.page-sidebar-menu > li > a > .arrow.open:before {   
+   float: right;
+   margin-top: 0px;
+   margin-right: 3px;
+   display: inline;
+   font-family: FontAwesome;
+   height: auto;
+   font-size: 16px;
+   content: "\f107";
+   font-weight: 300;
+   text-shadow:none;
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

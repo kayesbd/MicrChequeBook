@@ -1,0 +1,124 @@
+﻿@using KBZ.Administration.Domain.Model
+@*@using KBZ.Administration.Domain.Model
+    @using KBZ.Utils.Infrastructure
+    @model CustomUserPrincipal*@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KBZ cheque Management System</title>
+    <!-- start: META -->
+    <meta charset="utf-8" />
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+    <link rel="shortcut icon" href="~/Content/Images/favicon.ico" />
+    <link href="~/Content/bootstrapForLogin.min.css" rel="stylesheet" />
+    <link href="~/Content/styles/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <script src="~/Scripts/Library/jquery-2.1.0.js"></script>
+    <script src="~/Scripts/Library/bootstrap.min.js"></script>
+   
+    <script src="@Url.Content("~/Scripts/Library/angular.js")"></script>
+    <script src="@Url.Content("~/Scripts/Library/angular-route.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/Library/angular-cookies.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/app.js")"></script>
+    <script src="@Url.Content("~/Scripts/utils.js")"></script>
+    <script src="@Url.Content("~/Scripts/Admin/ForgotPasswordController.js")"></script>
+    
+    @*<script src="https://www.google.com/recaptcha/api.js?onload=vcRecapthaApiLoaded&render=explicit" async defer></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/angular-recaptcha.js")"></script>*@
+
+
+
+    <!-- end: META -->
+    <!-- start: MAIN CSS -->
+   
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!-- end: MAIN CSS -->
+    <!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
+    <!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
+    
+</head>
+<body class="login example2">
+
+
+    @{
+        var loggedInUser = HttpContext.Current.User as KBZ.Utils.Infrastructure.CustomUserPrincipal;
+       
+        if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            var loginUserInformation = new KBZ.Security.Domain.Model.UserInformationModel();
+
+            if (Session["UserInformation"] != null)
+            {
+                loginUserInformation = (KBZ.Security.Domain.Model.UserInformationModel)Session["UserInformation"];
+            }
+
+            if (loginUserInformation != null && loginUserInformation.IsPasswordExpired == false && loginUserInformation.IsNotifyRequiredforPassword && loginUserInformation.PasswordExpirationRemainingAge > 0)
+            {
+                <script>
+                    alert("Your password will be expired within @loginUserInformation.PasswordExpirationRemainingAge days. Please change your password.");
+                </script>
+            }
+
+            <span>Welcome</span>
+            <span>@HttpContext.Current.User.Identity.Name</span>
+            <br />
+            if (@loggedInUser != null)
+            {
+                if (loginUserInformation != null && loginUserInformation.UserType == KBZ.Security.Domain.Model.UserType.BankAdmin.ToString())
+                {
+                    if (Session["BankName"] != null)
+                    {
+                        <span style="font-weight: bold">  @Session["BankName"]   </span>
+                        <span style="color: white">|</span>
+
+                    }
+                }
+            }
+            if (@loggedInUser != null)
+            {
+                <span>@loggedInUser.UTCTimeId</span>
+            }
+
+            <br />
+            <a href="/#/Administrator/Admin/UserPasswordChange"><span style="color: #fff">Change password</span></a>
+            <span class="bar">&nbsp; | &nbsp;</span>
+            <a id="Logoff" href="@Url.Action("LogOff", "Account", new {area = ""})"><span style="color: #fff">Sign out</span></a>
+        }
+        else
+        {
+
+            <div style="padding-top: 10px;"><a href="#"><span style="color: #c3f0ff"> </span></a></div>
+        }
+    }
+
+    
+        @RenderBody()
+       
+   @*-----------------Alert Message Start----------------------*@
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog " style="width:  500px;">
+            <div class="modal-content">
+                <div class="modal-header alert alert-success" style="padding-bottom: 26px;  padding-top: 7px;padding-left: 15px;">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                    <span style=" float: left; font-size: 15px;">Success</span>
+                </div>
+                <div class="modal-body">
+                    <span class="modal-title icomoon-checkmark-3 success" style="font-size: 28px; float: left; color: #47A446;" id="successModaltitleText"></span>
+                    <p id="successModalText"></p>
+                    <br />
+                    <button type="button" class="btn btn-success btn-lg" data-dismiss="modal" style="border-radius: 5px; font-size: 12px; padding-top: 8px; padding-left: 16px;vertical-align: central ">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*-----------------Alert Message End----------------------*@
+
+</body>
+
+</html>

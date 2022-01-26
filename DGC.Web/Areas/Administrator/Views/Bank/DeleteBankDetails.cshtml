@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="col-sm-10">
+    <form>
+        <div class="row" id="editPanel">
+            <div class="col-sm-6">
+                <div class="formGroup">
+                    <fieldset>
+                        <legend>General Information</legend>
+                        @*<input type="hidden" ng-model="customerVM.customerId" />*@
+                        <input type="hidden" ng-model="bankVM.Id" />
+                        <label>Bank Name :</label><input type="text" ng-model="bankVM.BankName" disabled /><br />
+                        <label>ShortCode :</label><input type="text" ng-model="bankVM.ShortCode" disabled /><br />
+                        <label>BIN:</label><input type="text" ng-model="bankVM.BinCode" disabled /><br />
+                        <label>Phone No :</label><input type="text" ng-model="bankVM.PhoneNo" disabled /><br />
+                        <label>Address 1</label><input type="text" name="Address1" ng-model="bankVM.Address1" disabled /><br />
+                        <label>Address 2</label><input type="text" name="Address2" ng-model="bankVM.Address2" disabled /><br />
+                        <label>Country</label><select name="CountryId" ng-model="bankVM.CountryId" ng-options="item.Id as item.CountryName +' (' + item.CountryCodeNumeric + ')' for item in countryList" ng-change="GetStates()" disabled> </select><br />
+                        <label>State</label><select ng-model="bankVM.StateId" ng-options="a.Id as a.StateName for a in states" disabled></select><br />
+                        <label>City</label><input type="text" name="City" ng-model="bankVM.City" disabled />
+                    </fieldset>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="formGroup">
+                    <fieldset>
+                        <legend>Contact Person</legend>
+                        <label>First Name :</label><input type="text" ng-model="personVM.FirstName" disabled /><br />
+                        <label>Middle Name :</label><input type="text" ng-model="personVM.MiddleName" disabled /><br />
+                        <label>Last Name :</label><input type="text" ng-model="personVM.LastName" disabled /><br />
+                        <label>Mobile No :</label><input type="text" ng-model="personVM.MobileNumber" disabled /><br />
+                        <label>Designation :</label><input type="text" ng-model="personVM.Designation" disabled /><br />
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 col-md-offset-7">
+                <input type="button" class="form-control btn btn-primary admn-btn-re3" value="Delete" ng-click="delete()" />
+            </div>
+            <div class="col-sm-2" style="margin-right:5px;">
+                <input type="button" class="form-control btn btn-primary admn-btn-re3" value="Cancel" ng-click="cancel()" />
+            </div>
+        </div>
+        <div class="row" style="height:20px;">
+
+        </div>
+    </form>
+</div>

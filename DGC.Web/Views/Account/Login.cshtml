@@ -1,0 +1,216 @@
+﻿
+@using KBZ.Administration.Domain.Model
+@model KBZ.Utils.Models.LoginViewModel
+@using System.Configuration
+
+<link href="~/assets/css/MyraidPro.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+
+
+
+
+}
+<script type="text/javascript">
+
+    // alert(document.URL);
+    var UILocation = window.location.protocol + "//" + window.location.host + "/Account/Login";
+
+    if (document.URL != UILocation) {
+
+        window.location.href = UILocation;
+    }
+    
+    function GetBaseUrl() {
+        try {
+            var url = location.href;
+
+            var start = url.indexOf('//');
+            if (start < 0)
+                start = 0
+            else
+                start = start + 2;
+
+            var end = url.indexOf('/', start);
+            if (end < 0) end = url.length - start;
+
+            var baseURL = url.substring(start, end);
+            return baseURL;
+        }
+        catch (arg) {
+            return null;
+        }
+    }
+
+    function RedirectToLoginPage() {
+    
+        var pathname = window.location.pathname;
+        if (pathname == "/Account/Login") {
+            debugger;
+            if (jQuery("#menu") != undefined) {
+                if (jQuery("#menu").attr("Role") != undefined) {
+                    //if exists menu
+                    location.href = GetBaseUrl() + "/Account/Login";
+                }
+                else {
+
+                }
+            }
+        }
+    }
+
+
+    jQuery(document).ready(function () {
+        history.clear();
+        RedirectToLoginPage();
+
+    });
+</script>
+<div class="col-sm-4"></div>
+<div class="main-login col-md-4">
+    <!-- start: LOGIN BOX -->
+    <div class="box-login">
+        <img src="/Content/Images/kbz-logo.png" alt="KBZ Logo" /><br /><br />
+        <h3 style="font-family: MyriadPro !important; margin:8px 0 5px 0 !important">Log in to your account</h3>
+        <p>
+            Please enter your username and password to log in.
+        </p>
+
+
+        @{
+            try
+            {
+                using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl, trid = ViewBag.trid }, FormMethod.Post, new { @class = "form-login", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+        <fieldset>
+            <div class="form-group">
+                <span class="input-icon">
+                    @*<input type="text" class="form-control" name="username" placeholder="Username">*@
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Username", autocomplete = "off", required = "required " })
+                    <i class="fa fa-user"></i>
+                </span>
+            </div>
+            <div class="form-group">
+                <span class="input-icon">
+                    @*<input type="password" class="form-control password" name="password" placeholder="Password">*@
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control password", placeholder = "Password", autocomplete = "off", required = "required " })
+                    <i class="fa fa-lock"></i>
+                </span>
+            </div>
+
+
+
+            @if (Session["UserInformation"] != null)
+            {
+                var loginUserInformation = (KBZ.Security.Domain.Model.UserInformationModel)Session["UserInformation"];
+
+                if (loginUserInformation != null && loginUserInformation.IsPasswordExpired)
+                {
+                    <span>Your password is expired. Please cantact with KBZ administrator.</span>
+                }
+
+            }
+            @{
+                try
+                {
+                    if (@Model != null && @Model.IsError)
+                    {
+                        <span style="color:red;">@Model.ErrorMessage</span>
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            @*<a href="#myModal" data-toggle="modal" data-target="#myModal" data-backdrop="static">Forgot password?</a>*@
+            <button type="submit" class="btn btn-primary pull-right">
+                Login <i class="fa fa-arrow-circle-right"></i>
+            </button><br /><br /><br />
+
+
+            <div class="new-account">
+                Don't have an account yet? <br />
+                <a href=@ViewBag.CustomerRegisterUrl>Register</a>
+
+            </div>
+        </fieldset>
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+        }
+    </div>
+    <!-- end: LOGIN BOX -->
+    <!-- start: COPYRIGHT -->
+    <div class="copyright">
+        <br />
+        <p>
+            <strong>For Assistance:</strong> Contact our Client Support Team Monday - Friday, 10:00am to 6:35pm Central Time.
+            Phone: +XXXXXXXXXXXXXX
+            |Email: support@KBZ.com
+        </p>
+        <hr style="border-top: 1px solid #999;">
+        <p>&copy; 2014-<script>document.write(new Date().getFullYear());</script>  KBZ Bank Ltd.</p>
+    </div>
+    <!-- end: COPYRIGHT -->
+</div>
+
+
+
+
+
+
+
+@*--------------------Forgot Password Start---------------------------*@
+
+@*<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Launch demo modal
+    </button>*@
+
+<!-- Modal -->
+<div ng-app="nuspayAppLogin" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="ForgotPasswordController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <img src="/Content/Images/kbz-logo.png" alt="KBZ Logo" />
+            </div>
+            <form name="forgotPWForm" ng-submit="submitForm(forgotPWForm)">
+                <div class="modal-body">
+
+                    <h3>Forgot your password?</h3>
+                    <p>Enter your email address and we'll help you reset your password.</p>
+
+                    <div>
+                        <input type="email" required class="form-control" placeholder="Email Address" autocomplete="off" ng-model="forgotPWVM.email" />
+                    </div>
+                    <br />
+                    <div style="color:red"> {{validationForgortPW}}<br /><br /></div>
+                    <div id="ForgortPWId"></div>
+                    <div ng-model="model.captcha">
+                        <div vc-recaptcha theme="light" key="model.key" on-create="setWidgetId(widgetId)" on-success="setResponse(response)"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+                    <button type="submit" class="btn btn-primary">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*--------------------Forgot Password End---------------------------*@
+
+
+<script>
+    RedirectToLoginPage();
+</script>

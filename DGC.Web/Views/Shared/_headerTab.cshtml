@@ -1,0 +1,37 @@
+﻿<div id="tabsOuterFrame">
+    <tabset ng-controller="tabController">
+        <tab heading="Home">
+            <div class="divHomeContainer">
+                <div>
+                    <a href="~/Administrator/BankList/Index">Admin Settings</a>
+                </div>
+                <div ng-controller="CarouselDemoCtrl">
+                    <div style="height: 100px">
+                        <carousel interval="myInterval">
+                            <slide ng-repeat="slide in slides" active="slide.active">
+                                <img ng-src="{{slide.image}}" style="margin:auto;">
+                                <div class="carousel-caption">
+                                    <h4>Slide {{$index}}</h4>
+                                    @*<p>{{slide.text}}</p>*@
+                                </div>
+                            </slide>
+                        </carousel>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Payment Solution">
+            <h3>Payment Solution</h3>
+        </tab>
+
+        <tab heading="Developers">
+
+        </tab>
+        <tab heading="Members">
+
+        </tab>
+        <tab heading="Pricing">
+
+        </tab>
+    </tabset>
+</div>
