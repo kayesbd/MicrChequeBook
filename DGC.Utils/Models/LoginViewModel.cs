@@ -13,5 +13,9 @@ namespace KBZ.Utils.Models
         public string AccessToken { get; set; }
         public DateTime AccessTokenValidityPeriod { get; set; }
         public string FullName { get; set; }
+        public bool IsError { get; set; }
+
+        public string ErrorMessage { get; set; }
+        
     }
 }

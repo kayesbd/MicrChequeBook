@@ -50,14 +50,14 @@
        
         if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
         {
-            var loginUserInformation = new KBZ.Security.Domain.Model.UserInformationModel();
+            var loginUserInformation = new KBZ.Administration.Domain.Model.UserInformationModel();
 
             if (Session["UserInformation"] != null)
             {
-                loginUserInformation = (KBZ.Security.Domain.Model.UserInformationModel)Session["UserInformation"];
+                loginUserInformation = (KBZ.Administration.Domain.Model.UserInformationModel)Session["UserInformation"];
             }
 
-            if (loginUserInformation != null && loginUserInformation.IsPasswordExpired == false && loginUserInformation.IsNotifyRequiredforPassword && loginUserInformation.PasswordExpirationRemainingAge > 0)
+            if (loginUserInformation != null  && loginUserInformation.PasswordExpirationRemainingAge > 0)
             {
                 <script>
                     alert("Your password will be expired within @loginUserInformation.PasswordExpirationRemainingAge days. Please change your password.");
@@ -69,7 +69,7 @@
             <br />
             if (@loggedInUser != null)
             {
-                if (loginUserInformation != null && loginUserInformation.UserType == KBZ.Security.Domain.Model.UserType.BankAdmin.ToString())
+                if (loginUserInformation != null && loginUserInformation.UserType == KBZ.Utils.App_Start.UserType.BankAdmin.ToString())
                 {
                     if (Session["BankName"] != null)
                     {

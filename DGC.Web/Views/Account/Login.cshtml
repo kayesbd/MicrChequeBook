@@ -1,7 +1,7 @@
 ﻿
-@using KBZ.Administration.Domain.Model
+
 @model KBZ.Utils.Models.LoginViewModel
-@using System.Configuration
+
 
 <link href="~/assets/css/MyraidPro.css" rel="stylesheet" />
 @{
@@ -104,9 +104,9 @@
 
             @if (Session["UserInformation"] != null)
             {
-                var loginUserInformation = (KBZ.Security.Domain.Model.UserInformationModel)Session["UserInformation"];
+                var loginUserInformation = (KBZ.Administration.Domain.Model.UserInformationModel)Session["UserInformation"];
 
-                if (loginUserInformation != null && loginUserInformation.IsPasswordExpired)
+                if (loginUserInformation != null )
                 {
                     <span>Your password is expired. Please cantact with KBZ administrator.</span>
                 }
